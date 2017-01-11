@@ -9,7 +9,7 @@ import Foundation
 class {{template}}Manager : RCTViewManager {
   // Export constants to use in your native module
   override func constantsToExport() -> [String : Any]! {
-    return [:]
+    return ["EXAMPLE_CONSTANT": "example"]
   }
 
   // Return the native view that represents your React component

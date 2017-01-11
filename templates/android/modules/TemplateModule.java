@@ -35,7 +35,7 @@ public class {{template}}Module extends ReactContextBaseJavaModule {
         // Export any constants to be used in your native module
         // https://facebook.github.io/react-native/docs/native-modules-android.html#the-toast-module
         final Map<String, Object> constants = new HashMap<>();
-        constants.put("EXAMPLE", "example");
+        constants.put("EXAMPLE_CONSTANT", "example");
 
         return constants;
     }
