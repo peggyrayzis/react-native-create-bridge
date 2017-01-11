@@ -1,0 +1,51 @@
+{
+  "name": "react-native-create-bridge",
+  "version": "1.0.0",
+  "description": "A CLI generator that creates React Native bridges with ease!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src --out-dir build",
+    "build:watch": "babel -w src --out-dir build",
+    "start": "node build/index.js",
+    "test": "jest"
+  },
+  "bin": {
+    "create-bridge": "build/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peggyrayzis/react-native-create-bridge.git"
+  },
+  "keywords": [
+    "react",
+    "native"
+  ],
+  "author": "Peggy Rayzis & Kurt Kemple",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/peggyrayzis/react-native-create-bridge/issues"
+  },
+  "homepage": "https://github.com/peggyrayzis/react-native-create-bridge#readme",
+  "dependencies": {
+    "plop": "^1.7.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.21.0",
+    "babel-preset-env": "^1.1.8",
+    "jest": "^18.1.0"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": 4
+          }
+        }
+      ]
+    ]
+  }
+}
