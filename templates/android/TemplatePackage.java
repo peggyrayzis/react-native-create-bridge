@@ -1,4 +1,4 @@
-package com.{{app}}.{{template}};
+package com.{{app}}.{{packageName}};
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;

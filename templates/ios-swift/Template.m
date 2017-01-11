@@ -8,7 +8,7 @@
 
 // Export a native module
 // https://facebook.github.io/react-native/docs/native-modules-ios.html#exporting-swift
-@interface RCT_EXTERN_MODULE({{template}}, {{bridgeType}})
+@interface RCT_EXTERN_MODULE({{template}}, RCTViewManager)
 
 // Map native properties to React Component props
 // https://facebook.github.io/react-native/docs/native-components-ios.html#properties

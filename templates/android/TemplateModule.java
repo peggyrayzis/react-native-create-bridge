@@ -1,4 +1,4 @@
-package com.{{app}}.{{template}};
+package com.{{app}}.{{packageName}};
 
 import android.support.annotation.Nullable;
 
