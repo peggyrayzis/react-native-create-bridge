@@ -6,15 +6,15 @@
 #import "RCTViewManager.h"
 #import "RCTEventDispatcher.h"
 
-// Use RCT_EXTERN_MODULE to export a native module
+// Export a native module
 // https://facebook.github.io/react-native/docs/native-modules-ios.html#exporting-swift
 @interface RCT_EXTERN_MODULE({{template}}, {{bridgeType}})
 
-// Use RCT_EXPORT_VIEW_PROPERTY to map properties to React Component props
+// Map native properties to React Component props
 // https://facebook.github.io/react-native/docs/native-components-ios.html#properties
-RCT_EXPORT_VIEW_PROPERTY("exampleProperty", NSString)
+RCT_EXPORT_VIEW_PROPERTY("exampleProp", NSString)
 
-// Use RCT_EXTERN_METHOD to export methods to a native module
+// Export methods to a native module
 // https://facebook.github.io/react-native/docs/native-modules-ios.html#exporting-swift
 RCT_EXTERN_METHOD(exampleMethod)
 
