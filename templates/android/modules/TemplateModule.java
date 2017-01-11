@@ -17,6 +17,7 @@ public class {{template}}Module extends ReactContextBaseJavaModule {
 
     public {{template}}Module(ReactApplicationContext context) {
         // Pass in the context to the constructor and save it so you can emit events
+        // https://facebook.github.io/react-native/docs/native-modules-android.html#the-toast-module
         super(context);
 
         reactContext = context;
@@ -25,12 +26,14 @@ public class {{template}}Module extends ReactContextBaseJavaModule {
     @Override
     public String getName() {
         // Tell React the name of the module
+        // https://facebook.github.io/react-native/docs/native-modules-android.html#the-toast-module
         return REACT_CLASS;
     }
 
     @Override
     public Map<String, Object> getConstants() {
         // Export any constants to be used in your native module
+        // https://facebook.github.io/react-native/docs/native-modules-android.html#the-toast-module
         final Map<String, Object> constants = new HashMap<>();
         constants.put("EXAMPLE", "example");
 
@@ -40,10 +43,12 @@ public class {{template}}Module extends ReactContextBaseJavaModule {
     @ReactMethod
     public void exampleMethod () {
         // An example native method that you will expose to React
+        // https://facebook.github.io/react-native/docs/native-modules-android.html#the-toast-module
     }
 
     private static void emitDeviceEvent(String eventName, @Nullable WritableMap eventData) {
         // A method for emitting from the native side to JS
+        // https://facebook.github.io/react-native/docs/native-modules-android.html#sending-events-to-javascript
         reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(eventName, eventData);
     }
 }
