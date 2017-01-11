@@ -13,7 +13,11 @@ import java.util.List;
 public class {{template}}Package implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-        return Collections.emptyList();
+      // Register your native module
+      // https://facebook.github.io/react-native/docs/native-modules-android.html#register-the-module
+      return Arrays.<NativeModule>asList(
+          new {{template}}Module(reactContext)
+      );
     }
 
     @Override
@@ -25,7 +29,7 @@ public class {{template}}Package implements ReactPackage {
         // Register your native component's view manager
         // https://facebook.github.io/react-native/docs/native-components-android.html#4-register-the-viewmanager
         return Arrays.<ViewManager>asList(
-            new {{template}}Manager(reactContext)
+            new {{template}}Manager()
         );
     }
 }
