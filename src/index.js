@@ -1,17 +1,15 @@
 import inquirer from 'inquirer'
 import path from 'path'
-import fs from 'fs'
+import fs from 'mz/fs'
+import isValid from 'is-valid-path'
 
 const templateNameRegex = /\w+/
-const validDirectoryRegex = //
-
 const pkg = require(path.join(process.cwd, 'package.json'))
-
 const promptConfig = [
   {
     type: 'input',
     name: 'templateName',
-    message: 'What do you want to call your bridge module?',
+    message: 'What is your bridge module called?',
     default: 'ExampleBridge',
     validate: (input) => templateNameRegex.test(input),
   },
@@ -25,14 +23,11 @@ const promptConfig = [
   {
     type: 'input',
     name: 'jsPath',
-    message: 'What directory would you like us to deliver your JavaScript files?',
+    message: 'What path should we deliver your JS files to?',
     default: '.',
-    validate: (input) => validDirectoryRegex.test(input),
+    validate: (input) => isValid(input),
   }
 ]
-
-inquirer.prompt(promptConfig)
-  .then(answers => answers.environment.map(env => environmentMap[env](answers.templateName)))
 
 const environmentMap = {
   'Android/Java': createAndroidEnvironment,
@@ -40,9 +35,48 @@ const environmentMap = {
   'iOS/Objective-C': createObjCEnvironment
 }
 
-function createAndroidEnvironment (templateName) {
-  const templateDirPath = path.join(__dirname, '..', 'templates', 'android')
-  const writeDirPath = path.join(
+async function init () {
+  try {
+    const answers = inquirer.prompt(promptConfig)
+
+    await* answers.environment.map(async function(env) {
+      return environmentMap[env](answers.templateName))
+    })
+
+    await createJSModules(answers.templateName, answers.jsPath)
+
+    console.log('Your bridge was successfully created! 🎉')
+  } catch (e) {
+    console.log(err))
+  }
+}
+
+function parseFile (fileData, templateName, packageName = null, app = null) {
+  if (packageName && app) {
+    return fileData.replace('{{packageName}}', packageName)
+    .replace('{{app}}', app)
+    .replace('{{template}}', templateName)
+  } else {
+    return fileData.replace('{{template}}', templateName)
+  }
+}
+
+async function readAndWriteFiles (files, paths, templateName, packageName = null, app = null) {
+  const { readDirPath, writeDirPath } = paths
+  try {
+    return await* files.map(async function(file) {
+      const fileData = await fs.readFile(path.join(readDirPath, file), 'utf-8')
+      parseFile(fileData)
+      fileName = file.replace('Template', templateName)
+      await fs.writeFile(path.join(writeDirPath, fileName), fileData)
+    }
+  } catch (err) {
+    console.err(err)
+  }
+}
+
+async function createAndroidEnvironment (templateName) {
+  const appPath = path.join(
     process.cwd,
     'android',
     'app',
@@ -50,69 +84,42 @@ function createAndroidEnvironment (templateName) {
     'main',
     'java',
     'com',
-    pkg.name,
-    templateName.toLowerCase()
+    pkg.name
   )
-
-  fs.readFile(path.join(templateDirPath, 'TemplatePackage.java'), (err, data) => {
-    data.replace('{{template}}', templateName)
-      .replace('{{packageName}}', templateName.toLowerCase())
-      .replace('{{app}}', pkg.name)
-
-    fs.writeFile(path.join(writeDirPath, `${templateName}Package.java`), data)
-  })
-
-  fs.readFile(path.join(templateDirPath, 'TemplateModule.java'), (err, data) => {
-    data.replace('{{template}}', templateName)
-      .replace('{{packageName}}', templateName.toLowerCase())
-      .replace('{{app}}', pkg.name)
-
-    fs.writeFile(path.join(writeDirPath, `${templateName}Module.java`), data)
-  })
-
-  fs.readFile(path.join(templateDirPath, 'TemplateManager.java'), (err, data) => {
-    data.replace('{{template}}', templateName)
-      .replace('{{packageName}}', templateName.toLowerCase())
-      .replace('{{app}}', pkg.name)
-
-    fs.writeFile(path.join(writeDirPath, `${templateName}Manager.java`), data)
-  })
+  const paths = {
+    readDirPath: path.join(__dirname, '..', 'templates', 'android')
+    writeDirPath: await fs.makeDir(path.join(appPath, templateName.toLowerCase()))
+  }
+  const files = ['TemplatePackage.java', 'TemplateModule.java', 'TemplateManager.java']
+  await readAndWriteFiles(files, paths, templateName, templateName.toLowerCase(), pkg.name)
 }
 
 function createSwiftEnvironment (templateName) {
-  const templateDirPath = path.join(__dirname, '..', 'templates', 'ios-swift')
-  const writeDirPath = path.join(process.cwd, 'ios')
-
-  fs.readFile(path.join(templateDirPath, 'Template.m'), (err, data) => {
-    data.replace('{{template}}', templateName)
-
-    fs.writeFile(path.join(writeDirPath, `${templateName}.m`), data)
-  })
-
-  fs.readFile(path.join(templateDirPath, 'TemplateManager.swift'), (err, data) => {
-    data.replace('{{template}}', templateName)
-
-    fs.writeFile(path.join(writeDirPath, `${templateName}Manager.swift`), data)
-  })
+  const paths = {
+    readDirPath: path.join(__dirname, '..', 'templates', 'ios-swift')
+    writeDirPath: path.join(process.cwd, 'ios')
+  }
+  const files = ['Template.m', 'TemplateManager.swift']
+  await readAndWriteFiles(files, paths, templateName)
 }
+
 
 function createObjCEnvironment (templateName) {
-  const templateDirPath = path.join(__dirname, '..', 'templates', 'ios-objc')
-  const writeDirPath = path.join(process.cwd, 'ios')
-
-  fs.readFile(path.join(templateDirPath, 'Template.h'), (err, data) => {
-    data.replace('{{template}}', templateName)
-
-    fs.writeFile(path.join(writeDirPath, `${templateName}.h`), data)
-  })
-
-  fs.readFile(path.join(templateDirPath, 'TemplateManager.m'), (err, data) => {
-    data.replace('{{template}}', templateName)
-
-    fs.writeFile(path.join(writeDirPath, `${templateName}Manager.m`), data)
-  })
+  const paths = {
+    readDirPath: path.join(__dirname, '..', 'templates', 'ios-objc')
+    writeDirPath: path.join(process.cwd, 'ios')
+  }
+  const files = ['Template.h', 'TemplateManager.m']
+  await readAndWriteFiles(files, paths, templateName)
 }
 
-function createJSEnvironment () {
-  const templateDirPath = path.join(__dirname, '..', 'templates', 'js')
+async function createJSEnvironment (templateName, jsPath) {
+  const paths = {
+    readDirPath: path.join(__dirname, '..', 'templates', 'js'),
+    writeDirPath: jsPath
+  }
+  const files = ['TemplateNativeModule.js', 'TemplateNativeView.js']
+  await readAndWriteFiles(files, paths, templateName)
 }
+
+init()
