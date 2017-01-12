@@ -38,6 +38,10 @@ const environmentMap = {
   'iOS/Objective-C': createObjCEnvironment
 }
 
+function isRNVersionNew ({ dependencies }) {
+  return parseFloat(dependencies["react-native"]) >= 0.4
+}
+
 async function init () {
   try {
     const answers = await inquirer.prompt(promptConfig)
@@ -57,13 +61,16 @@ async function init () {
 }
 
 function parseFile (fileData, templateName, packageName = null, app = null) {
-  if (packageName && app) {
-    return fileData.replace(/{{packageName}}/g, packageName)
-      .replace(/{{app}}/g, app)
-      .replace(/{{template}}/g, templateName)
-  } else {
-    return fileData.replace(/{{template}}/g, templateName)
-  }
+  const isRNNew = isRNVersionNew(pkg)
+
+  const iOSHeader = isRNNew ? '<React/' : '"'
+  const iOSCloser = isRNNew ? '>' : '"'
+
+  return fileData.replace(/{{template}}/g, templateName)
+    .replace(/{{packageName}}/g, packageName)
+    .replace(/{{app}}/g, app)
+    .replace(/{{iOSHeader}}/g, iOSHeader)
+    .replace(/{{iOSCloser}}/g, iOSCloser)
 }
 
 function readAndWriteFiles (files, paths, templateName, packageName = null, app = null) {

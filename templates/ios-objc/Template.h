@@ -1,6 +1,6 @@
 //  Created by react-native-create-bridge
 
-#import "RCTBridgeModule.h"
+#import {{iOSHeader}}RCTBridgeModule.h{{iOSCloser}}
 
 @interface {{template}} : NSObject <RCTBridgeModule>
   // Define class properties here

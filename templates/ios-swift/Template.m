@@ -1,7 +1,7 @@
 //  Created by react-native-create-bridge
 
-#import "RCTViewManager.h"
-#import "RCTEventDispatcher.h"
+#import {{iOSHeader}}RCTViewManager.h{{iOSCloser}}
+#import {{iOSHeader}}RCTEventDispatcher.h{{iOSCloser}}
 
 // Export a native module
 // https://facebook.github.io/react-native/docs/native-modules-ios.html#exporting-swift

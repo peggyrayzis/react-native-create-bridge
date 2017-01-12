@@ -1,7 +1,7 @@
 //  Created by react-native-create-bridge
 
-#import "RCTBridge.h"
-#import "RCTEventDispatcher.h"
+#import {{iOSHeader}}RCTBridge.h{{iOSCloser}}
+#import {{iOSHeader}}RCTEventDispatcher.h{{iOSCloser}}
 
 @implementation {{template}}
 @synthesize bridge = _bridge;
