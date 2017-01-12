@@ -1,16 +1,10 @@
 import React, { Component } from 'react'
 import { requireNativeComponent } from 'react-native'
 
-const DFPBannerAd = requireNativeComponent('{{template}}', null)
-
-type Props = {|
-  exampleProp: any
-|}
+const {{template}} = requireNativeComponent('{{template}}', null)
 
 class {{template}}View extends Component {
-  props: Props
-
-  render (): React.Element<any> {
+  render () {
     return <{{template}} {...this.props} />
   }
 }

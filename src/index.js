@@ -39,15 +39,17 @@ async function init () {
   try {
     const answers = inquirer.prompt(promptConfig)
 
-    await* answers.environment.map(async function(env) {
-      return environmentMap[env](answers.templateName))
+    const promises = answers.environment.map(async function(env) {
+      return environmentMap[env](answers.templateName)
     })
 
-    await createJSModules(answers.templateName, answers.jsPath)
+    promises.push(createJSModules(answers.templateName, answers.jsPath))
+
+    await Promise.all(promises)
 
     console.log('Your bridge was successfully created! 🎉')
   } catch (e) {
-    console.log(err))
+    console.log(err)
   }
 }
 
@@ -64,12 +66,14 @@ function parseFile (fileData, templateName, packageName = null, app = null) {
 async function readAndWriteFiles (files, paths, templateName, packageName = null, app = null) {
   const { readDirPath, writeDirPath } = paths
   try {
-    return await* files.map(async function(file) {
-      const fileData = await fs.readFile(path.join(readDirPath, file), 'utf-8')
-      parseFile(fileData)
-      fileName = file.replace('Template', templateName)
-      await fs.writeFile(path.join(writeDirPath, fileName), fileData)
-    }
+    await Promise.all(
+      files.map(async function(file) {
+        const fileData = await fs.readFile(path.join(readDirPath, file), 'utf-8')
+        parseFile(fileData)
+        fileName = file.replace('Template', templateName)
+        return fs.writeFile(path.join(writeDirPath, fileName), fileData)
+      })
+    )
   } catch (err) {
     console.err(err)
   }
@@ -87,26 +91,25 @@ async function createAndroidEnvironment (templateName) {
     pkg.name
   )
   const paths = {
-    readDirPath: path.join(__dirname, '..', 'templates', 'android')
+    readDirPath: path.join(__dirname, '..', 'templates', 'android'),
     writeDirPath: await fs.makeDir(path.join(appPath, templateName.toLowerCase()))
   }
   const files = ['TemplatePackage.java', 'TemplateModule.java', 'TemplateManager.java']
   await readAndWriteFiles(files, paths, templateName, templateName.toLowerCase(), pkg.name)
 }
 
-function createSwiftEnvironment (templateName) {
+async function createSwiftEnvironment (templateName) {
   const paths = {
-    readDirPath: path.join(__dirname, '..', 'templates', 'ios-swift')
+    readDirPath: path.join(__dirname, '..', 'templates', 'ios-swift'),
     writeDirPath: path.join(process.cwd, 'ios')
   }
   const files = ['Template.m', 'TemplateManager.swift']
   await readAndWriteFiles(files, paths, templateName)
 }
 
-
-function createObjCEnvironment (templateName) {
+async function createObjCEnvironment (templateName) {
   const paths = {
-    readDirPath: path.join(__dirname, '..', 'templates', 'ios-objc')
+    readDirPath: path.join(__dirname, '..', 'templates', 'ios-objc'),
     writeDirPath: path.join(process.cwd, 'ios')
   }
   const files = ['Template.h', 'TemplateManager.m']
