@@ -1,7 +1,4 @@
-//
-//  {{template}}.m
-//
-//  Created by react-native-create-bridge on {{date}}.
+//  Created by react-native-create-bridge
 
 #import "RCTViewManager.h"
 #import "RCTEventDispatcher.h"

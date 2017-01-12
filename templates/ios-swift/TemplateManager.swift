@@ -1,7 +1,4 @@
-//
-//  {{template}}Manager.swift
-//
-//  Created by react-native-create-bridge on {{date}}.
+//  Created by react-native-create-bridge
 
 import Foundation
 

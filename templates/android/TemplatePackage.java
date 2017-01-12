@@ -1,3 +1,5 @@
+//  Created by react-native-create-bridge
+
 package com.{{app}}.{{packageName}};
 
 import com.facebook.react.ReactPackage;

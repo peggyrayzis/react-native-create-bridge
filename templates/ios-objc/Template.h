@@ -1,7 +1,4 @@
-//
-//  {{template}}.h
-//
-//  Created by react-native-create-bridge on {{date}}.
+//  Created by react-native-create-bridge
 
 #import "RCTBridgeModule.h"
 
