@@ -1,5 +1,6 @@
 //  Created by react-native-create-bridge
 
+#import "{{template}}.h"
 #import {{iOSHeader}}RCTBridge.h{{iOSCloser}}
 #import {{iOSHeader}}RCTEventDispatcher.h{{iOSCloser}}
 
