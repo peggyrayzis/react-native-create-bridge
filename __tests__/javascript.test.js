@@ -1,5 +1,5 @@
 import path from 'path'
-import { readFile, parseFile } from '../src'
+import { readFile, parseFile } from '../src/file-operations'
 
 describe('JS', () => {
   const templateName = 'TestModule'

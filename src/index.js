@@ -2,12 +2,12 @@
 
 import inquirer from 'inquirer'
 import path from 'path'
-import fs from 'mz/fs'
 import isValid from 'is-valid-path'
 import mkdir from 'mkdirp-promise'
 
+import readAndWriteFiles, { pkg } from './file-operations'
+
 const templateNameRegex = /\w+/
-const pkg = require(path.join(process.cwd(), 'package.json'))
 const promptConfig = [
   {
     type: 'input',
@@ -38,10 +38,6 @@ const environmentMap = {
   'iOS/Objective-C': createObjCEnvironment
 }
 
-export function isRNVersionNew ({ dependencies }) {
-  return parseFloat(dependencies["react-native"]) >= 0.4
-}
-
 async function init () {
   try {
     const answers = await inquirer.prompt(promptConfig)
@@ -58,36 +54,6 @@ async function init () {
   } catch (e) {
     console.log(e)
   }
-}
-
-export function parseFile (fileData, templateName, packageName = null, app = null) {
-  const isRNNew = isRNVersionNew(pkg)
-
-  const iOSHeader = isRNNew ? '<React/' : '"'
-  const iOSCloser = isRNNew ? '>' : '"'
-
-  return fileData.replace(/{{template}}/g, templateName)
-    .replace(/{{packageName}}/g, packageName)
-    .replace(/{{app}}/g, app)
-    .replace(/{{iOSHeader}}/g, iOSHeader)
-    .replace(/{{iOSCloser}}/g, iOSCloser)
-}
-
-export async function readFile (file, readDirPath) {
-  const fileData = await fs.readFile(path.join(readDirPath, file), 'utf-8')
-  return fileData
-}
-
-function readAndWriteFiles (files, paths, templateName, packageName = null, app = null) {
-  const { readDirPath, writeDirPath } = paths
-  return Promise.all(
-    files.map(async function(file) {
-      const fileData = await readFile(file, readDirPath)
-      const parsedFile = parseFile(fileData, templateName, packageName, app)
-      const fileName = file.replace('Template', templateName)
-      return fs.writeFile(path.join(writeDirPath, fileName), parsedFile)
-    })
-  )
 }
 
 async function createAndroidEnvironment (templateName) {
