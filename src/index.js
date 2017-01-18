@@ -4,6 +4,7 @@ import inquirer from 'inquirer'
 import path from 'path'
 import isValid from 'is-valid-path'
 import mkdir from 'mkdirp-promise'
+import { success as successIcon, error as errorIcon } from 'log-symbols'
 
 import readAndWriteFiles, { pkg } from './file-operations'
 
@@ -47,12 +48,11 @@ async function init () {
     })
 
     promises.push(createJSEnvironment(answers.templateName, answers.jsPath))
-
     await Promise.all(promises)
 
-    console.log('Your bridge was successfully created! 🎉')
+    console.log(`${successIcon} Your bridge module was successfully created! 🎉`)
   } catch (e) {
-    console.log(e)
+    console.log(`${errorIcon} Oh no! 💩  Something went wrong with creating your bridge module.\nPlease report any errors here: https://github.com/peggyrayzis/react-native-create-bridge/issues\n\nError: ${e}`)
   }
 }
 
