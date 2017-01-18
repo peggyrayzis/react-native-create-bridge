@@ -73,7 +73,7 @@ async function createAndroidEnvironment (templateName) {
     writeDirPath
   }
   const files = ['TemplatePackage.java', 'TemplateModule.java', 'TemplateManager.java']
-  return readAndWriteFiles(files, paths, templateName, templateName.toLowerCase(), pkg.name)
+  return readAndWriteFiles(files, paths, templateName, templateName.toLowerCase(), pkg.name.toLowerCase())
 }
 
 function createSwiftEnvironment (templateName) {

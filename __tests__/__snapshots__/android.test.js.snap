@@ -1,7 +1,7 @@
 exports[`Android/Java creates a TemplateManager.java 1`] = `
 "//  Created by react-native-create-bridge
 
-package com.TestApp.testmodule;
+package com.testapp.testmodule;
 
 import android.view.View;
 
@@ -39,7 +39,7 @@ public class TestModuleManager extends SimpleViewManager<View> {
 exports[`Android/Java creates a TemplateModule.java 1`] = `
 "//  Created by react-native-create-bridge
 
-package com.TestApp.testmodule;
+package com.testapp.testmodule;
 
 import android.support.annotation.Nullable;
 
@@ -99,7 +99,7 @@ public class TestModuleModule extends ReactContextBaseJavaModule {
 exports[`Android/Java creates a TemplatePackage.java 1`] = `
 "//  Created by react-native-create-bridge
 
-package com.TestApp.testmodule;
+package com.testapp.testmodule;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;

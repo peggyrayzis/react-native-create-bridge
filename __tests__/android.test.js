@@ -7,19 +7,19 @@ describe('Android/Java', () => {
 
   it('creates a TemplateManager.java', async () => {
     const fileData = await readFile('TemplateManager.java', readDirPath)
-    const parsedFile = parseFile(fileData, templateName, templateName.toLowerCase(), 'TestApp')
+    const parsedFile = parseFile(fileData, templateName, templateName.toLowerCase(), 'testapp')
     expect(parsedFile).toMatchSnapshot()
   })
 
   it('creates a TemplateModule.java', async () => {
     const fileData = await readFile('TemplateModule.java', readDirPath)
-    const parsedFile = parseFile(fileData, templateName, templateName.toLowerCase(), 'TestApp')
+    const parsedFile = parseFile(fileData, templateName, templateName.toLowerCase(), 'testapp')
     expect(parsedFile).toMatchSnapshot()
   })
 
   it('creates a TemplatePackage.java', async () => {
     const fileData = await readFile('TemplatePackage.java', readDirPath)
-    const parsedFile = parseFile(fileData, templateName, templateName.toLowerCase(), 'TestApp')
+    const parsedFile = parseFile(fileData, templateName, templateName.toLowerCase(), 'testapp')
     expect(parsedFile).toMatchSnapshot()
   })
 })
