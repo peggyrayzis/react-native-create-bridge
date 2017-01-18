@@ -1,5 +1,5 @@
 # react-native-create-bridge
-React Native bridge modules made easy!
+React Native bridge modules made easy! If you're a JavaScript developer writing your first lines of native code or a more experienced developer looking to eliminate boilerplate from your React Native workflow, this tool is for you.
 
 ## Getting Started
 1. `npm install -g react-native-create-bridge` or `yarn global add react-native-create-bridge`
@@ -33,7 +33,7 @@ Depending on your environment, there may be a couple more steps that you have to
   - Add `#import <YourModule/YourModule.h>` to the top of the file
 
 #### iOS/Swift
-  - If this is your first Swift module in your project, you will need to make sure you have a Obj-C bridging header to expose React Native code to Swift. Read [Importing Obj-C into Swift](https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html) to learn more.
+  - If this is your first Swift module in your project, you will need to make sure you have a Obj-C bridging header to expose any Obj-C code to Swift. Read [Importing Obj-C into Swift](https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html) to learn more.
 
 ## Goals
 - [x] Delivers bridge module in Obj-C, Swift, & Java
@@ -44,18 +44,16 @@ Depending on your environment, there may be a couple more steps that you have to
 
 
 ## Setting Up Dev Environment
-1. Fork this repo
-2. Clone it `git clone https://github.com/peggyrayzis/react-native-create-bridge`
-3. `cd` to where you cloned it
-4. `npm install` or `yarn`
-5. After you make changes, `npm run package`
-6. You can now run `create-bridge` locally to test your changes
+1. Fork this repo & clone it
+2. `cd` to where you cloned it
+3. `npm install` or `yarn`
+4. After you make changes, link your local package by running `npm run package:dev`
+5. You can now run `create-bridge` locally in a React Native project to test your changes
+6. `npm run test` will run the Jest test suite
 
 
 ## Contributing
-react-native-create-bridge is a new project and we would love feedback from the community on how it should evolve. Please report any 🐞s and let us know how you're using react-native-create-bridge!
-
-If you would like to contribute, please head to our [Contributor Guide](CONTRIBUTING.md).
+`react-native-create-bridge` is a new project and we would love feedback from the community on how it should evolve. Please report any 🐞s and let us know how you're using `react-native-create-bridge`!
 
 This project adheres to the Contributor Covenant [code of conduct](http://contributor-covenant.org/version/1/3/0/).
 By participating, you are expected to uphold this code. Please report unacceptable behavior to peggyrayzis@gmail.com.

@@ -8,7 +8,7 @@
     "build": "babel src --out-dir build",
     "build:watch": "babel -w src --out-dir build",
     "start": "node build/index.js",
-    "package": "npm unlink react-native-create-bridge && rm -rf node_modules && yarn && npm run build && npm link react-native-create-bridge"
+    "package:dev": "npm unlink react-native-create-bridge && rm -rf node_modules && yarn && npm run build && npm link react-native-create-bridge"
   },
   "bin": {
     "create-bridge": "build/index.js"
