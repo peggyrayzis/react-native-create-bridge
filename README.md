@@ -1,5 +1,5 @@
 # react-native-create-bridge
-
+React Native bridge modules made easy!
 
 ## Getting Started
 1. `npm install -g react-native-create-bridge` or `yarn global add react-native-create-bridge`
@@ -8,12 +8,12 @@
   - Your bridge module name
   - The platforms and languages you would like to support. Currently, we default to iOS/Obj-C, iOS/Swift, and Android/Java. We realize that this would not compile properly; however, we see this CLI as a learning tool to compare all 3 approaches.
   - The directory where you would like your JS files. If it doesn't exist, we'll create it for you.
-4. That's it! 📦 Sit back, relax, and we'll deliver your native module for you lightning fast! ⚡️
+4. That's it! 📦 Sit back and we'll deliver your native module for you lightning fast! ⚡️
 
 ## Next Steps
 Depending on your environment, there may be a couple more steps that you have to take. In future versions of react-native-create-bridge, we want to eliminate these steps.
 
-##### Android/Java
+#### Android/Java
   - To complete the bridging process, look for `MainApplication.java` in `android/app/src/main/java/com/yourapp`
   - Add your package to the getPackages function like this:
 
@@ -28,11 +28,11 @@ Depending on your environment, there may be a couple more steps that you have to
   ```
   - Import your package at the top: `import com.yourapp.yourmodule.YourModulePackage;`
 
-##### iOS/Obj-C
+#### iOS/Obj-C
   - To complete the bridging process, look for `AppDelegate.h` in `ios/yourapp`
   - Add `#import <YourModule/YourModule.h>` to the top of the file
 
-##### iOS/Swift
+#### iOS/Swift
   - If this is your first Swift module in your project, you will need to make sure you have a Obj-C bridging header to expose React Native code to Swift. Read [Importing Obj-C into Swift](https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html) to learn more.
 
 ## Goals

@@ -1,0 +1,138 @@
+exports[`Android/Java creates a TemplateManager.java 1`] = `
+"//  Created by react-native-create-bridge
+
+package com.TestApp.testmodule;
+
+import android.view.View;
+
+import com.facebook.react.uimanager.SimpleViewManager;
+import com.facebook.react.uimanager.ThemedReactContext;
+
+import com.facebook.react.uimanager.annotations.ReactProp;
+
+public class TestModuleManager extends SimpleViewManager<View> {
+    public static final String REACT_CLASS = \"TestModule\";
+
+    @Override
+    public String getName() {
+        // Tell React the name of the module
+        // https://facebook.github.io/react-native/docs/native-components-android.html#1-create-the-viewmanager-subclass
+        return REACT_CLASS;
+    }
+
+    @Override
+    public View createViewInstance(ThemedReactContext context){
+        // Create a view here
+        // https://facebook.github.io/react-native/docs/native-components-android.html#2-implement-method-createviewinstance
+        return new View(context);
+    }
+
+    @ReactProp(name = \"exampleProp\")
+    public void setExampleProp(View view, String prop) {
+        // Set properties from React onto your native component
+        // https://facebook.github.io/react-native/docs/native-components-android.html#3-expose-view-property-setters-using-reactprop-or-reactpropgroup-annotation
+    }
+}
+"
+`;
+
+exports[`Android/Java creates a TemplateModule.java 1`] = `
+"//  Created by react-native-create-bridge
+
+package com.TestApp.testmodule;
+
+import android.support.annotation.Nullable;
+
+import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContextBaseJavaModule;
+import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class TestModuleModule extends ReactContextBaseJavaModule {
+    public static final String REACT_CLASS = \"TestModule\";
+    private static ReactApplicationContext reactContext = null;
+
+    public TestModuleModule(ReactApplicationContext context) {
+        // Pass in the context to the constructor and save it so you can emit events
+        // https://facebook.github.io/react-native/docs/native-modules-android.html#the-toast-module
+        super(context);
+
+        reactContext = context;
+    }
+
+    @Override
+    public String getName() {
+        // Tell React the name of the module
+        // https://facebook.github.io/react-native/docs/native-modules-android.html#the-toast-module
+        return REACT_CLASS;
+    }
+
+    @Override
+    public Map<String, Object> getConstants() {
+        // Export any constants to be used in your native module
+        // https://facebook.github.io/react-native/docs/native-modules-android.html#the-toast-module
+        final Map<String, Object> constants = new HashMap<>();
+        constants.put(\"EXAMPLE_CONSTANT\", \"example\");
+
+        return constants;
+    }
+
+    @ReactMethod
+    public void exampleMethod () {
+        // An example native method that you will expose to React
+        // https://facebook.github.io/react-native/docs/native-modules-android.html#the-toast-module
+    }
+
+    private static void emitDeviceEvent(String eventName, @Nullable WritableMap eventData) {
+        // A method for emitting from the native side to JS
+        // https://facebook.github.io/react-native/docs/native-modules-android.html#sending-events-to-javascript
+        reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(eventName, eventData);
+    }
+}
+"
+`;
+
+exports[`Android/Java creates a TemplatePackage.java 1`] = `
+"//  Created by react-native-create-bridge
+
+package com.TestApp.testmodule;
+
+import com.facebook.react.ReactPackage;
+import com.facebook.react.bridge.JavaScriptModule;
+import com.facebook.react.bridge.NativeModule;
+import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.uimanager.ViewManager;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+public class TestModulePackage implements ReactPackage {
+    @Override
+    public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
+      // Register your native module
+      // https://facebook.github.io/react-native/docs/native-modules-android.html#register-the-module
+      return Arrays.<NativeModule>asList(
+          new TestModuleModule(reactContext)
+      );
+    }
+
+    @Override
+    public List<Class<? extends JavaScriptModule>> createJSModules() {
+        return Collections.emptyList();
+    }
+
+    public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
+        // Register your native component\'s view manager
+        // https://facebook.github.io/react-native/docs/native-components-android.html#4-register-the-viewmanager
+        return Arrays.<ViewManager>asList(
+            new TestModuleManager()
+        );
+    }
+}
+"
+`;
