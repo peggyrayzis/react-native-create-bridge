@@ -1,8 +1,24 @@
 //  Created by react-native-create-bridge
 
 #import "{{template}}.h"
-#import {{iOSHeader}}RCTBridge.h{{iOSCloser}}
-#import {{iOSHeader}}RCTEventDispatcher.h{{iOSCloser}}
+
+// import RCTBridge
+#if __has_include(<React/RCTBridge.h>)
+#import <React/RCTBridge.h>
+#elif __has_include(“RCTBridge.h”)
+#import “RCTBridge.h”
+#else
+#import “React/RCTBridge.h” // Required when used as a Pod in a Swift project
+#endif
+
+// import RCTEventDispatcher
+#if __has_include(<React/RCTEventDispatcher.h>)
+#import <React/RCTEventDispatcher.h>
+#elif __has_include(“RCTEventDispatcher.h”)
+#import “RCTEventDispatcher.h”
+#else
+#import “React/RCTEventDispatcher.h” // Required when used as a Pod in a Swift project
+#endif
 
 @implementation {{template}}
 @synthesize bridge = _bridge;
