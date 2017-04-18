@@ -1,6 +1,6 @@
 {
   "name": "react-native-create-bridge",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A CLI generator that creates React Native bridges with ease!",
   "main": "index.js",
   "scripts": {
