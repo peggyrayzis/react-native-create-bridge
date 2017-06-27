@@ -6,7 +6,7 @@ React Native bridge modules made easy! If you're a JavaScript developer writing 
 2. From the root of your React Native project, run `create-bridge`
 3. The prompts will ask you for:
   - Your bridge module name
-  - The platforms and languages you would like to support. Currently, we default to iOS/Obj-C, iOS/Swift, and Android/Java. We realize that this would not compile properly; however, we see this CLI as a learning tool to compare all 3 approaches.
+  - The platforms and languages you would like to support. Currently, we default to iOS/Obj-C and Android/Java, but you can also choose iOS/Swift or Android/Kotlin if you prefer.
   - The directory where you would like your JS files. If it doesn't exist, we'll create it for you.
 4. That's it! 📦 Sit back and we'll deliver your native module for you lightning fast! ⚡️
 
@@ -28,6 +28,26 @@ Depending on your environment, there may be a couple more steps that you have to
   ```
   - Import your package at the top: `import com.yourapp.yourmodule.YourModulePackage;`
 
+#### Android/Kotlin
+  ##### Adding Kotlin support to your project:
+  - You will need to install the [Android Studio 3 preview](https://developer.android.com/studio/preview/index.html)
+  - In `android/build.gradle`, add `ext.kotlin_version = '1.1.2-4'` to the `buildscript` and `classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"` to your `dependencies`
+  - In `android/app/build.gradle`, add `apply plugin: 'kotlin-android'` to the top of the file. At the bottom, add `compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"` to your dependencies
+  - Now, you can convert any Java file to a Kotlin file by navigating to `Code > Convert Java file to Kotlin file` in the top menu
+
+  ##### Completing the bridging process:
+  - If you already followed all the steps above, you can complete the bridging process by looking for `MainApplication.kt` in `android/app/src/main/java/com/yourapp`
+  - Add your package to the getPackages function like this:
+  ```
+  override fun getPackages(): List<ReactPackage> {
+    return Arrays.asList(
+        MainReactPackage(),
+        YourModulePackage(),
+    )
+  }
+  ```
+  - Import your package at the top: `import com.yourapp.yourmodule.YourModulePackage`
+
 #### iOS/Obj-C
   - To complete the bridging process, look for `AppDelegate.h` in `ios/yourapp`
   - Add `#import <YourModule/YourModule.h>` to the top of the file
@@ -36,7 +56,7 @@ Depending on your environment, there may be a couple more steps that you have to
   - If this is your first Swift module in your project, you will need to make sure you have a Obj-C bridging header to expose any Obj-C code to Swift. Read [Importing Obj-C into Swift](https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html) to learn more.
 
 ## Goals
-- [x] Delivers bridge module in Obj-C, Swift, & Java
+- [x] Delivers bridge module in Obj-C, Swift, Kotlin, & Java
 - [x] Compatible with all versions of React Native, including v0.40+
 - [ ] Config to remove comments for more experienced users
 - [ ] Modifies existing project files (`AppDelegate.h`, `MainApplication.java`) to complete the bridging process
