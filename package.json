@@ -5,10 +5,18 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "test:update": "npm test -- -u",
     "build": "babel src --out-dir build",
     "build:watch": "babel -w src --out-dir build",
     "start": "node build/index.js",
+    "precommit": "lint-staged",
     "package:dev": "npm unlink react-native-create-bridge && rm -rf node_modules && yarn && npm run build && npm link react-native-create-bridge"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "bin": {
     "create-bridge": "build/index.js"
@@ -42,7 +50,10 @@
     "babel-plugin-transform-runtime": "^6.15.0",
     "babel-polyfill": "^6.20.0",
     "babel-preset-env": "^1.1.8",
-    "jest": "^18.1.0"
+    "husky": "^0.14.1",
+    "jest": "^18.1.0",
+    "lint-staged": "^4.0.0",
+    "prettier": "^1.4.4"
   },
   "babel": {
     "presets": [
