@@ -10,7 +10,7 @@
     "build:watch": "babel -w src --out-dir build",
     "start": "node build/index.js",
     "precommit": "lint-staged",
-    "package:dev": "npm unlink react-native-create-bridge && rm -rf node_modules && yarn && npm run build && npm link react-native-create-bridge"
+    "package:dev": "npm unlink react-native-create-bridge && rm -rf node_modules && yarn && npm run build && npm link"
   },
   "lint-staged": {
     "*.js": [
