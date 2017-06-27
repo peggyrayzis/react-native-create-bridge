@@ -1,14 +1,14 @@
 exports[`Android/Kotlin creates a TemplateManager.kt 1`] = `
 "//  Created by react-native-create-bridge
 
-package com.testapp.testmodule;
+package com.testapp.testmodule
 
-import android.view.View;
+import android.view.View
 
-import com.facebook.react.uimanager.SimpleViewManager;
-import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.SimpleViewManager
+import com.facebook.react.uimanager.ThemedReactContext
 
-import com.facebook.react.uimanager.annotations.ReactProp;
+import com.facebook.react.uimanager.annotations.ReactProp
 
 class TestModuleManager : SimpleViewManager<View>() {
     
@@ -21,7 +21,7 @@ class TestModuleManager : SimpleViewManager<View>() {
     public override fun createViewInstance(context: ThemedReactContext): View {
         // Create a view here
         // https://facebook.github.io/react-native/docs/native-components-android.html#2-implement-method-createviewinstance
-        return View(context);
+        return View(context)
     }
 
     @ReactProp(name = \"exampleProp\")
@@ -40,24 +40,22 @@ class TestModuleManager : SimpleViewManager<View>() {
 exports[`Android/Kotlin creates a TemplateModule.kt 1`] = `
 "//  Created by react-native-create-bridge
 
-package com.testapp.testmodule;
+package com.testapp.testmodule
 
-import android.support.annotation.Nullable;
+import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.bridge.ReactContextBaseJavaModule
+import com.facebook.react.bridge.ReactMethod
+import com.facebook.react.bridge.WritableMap
+import com.facebook.react.modules.core.DeviceEventManagerModule
 
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContextBaseJavaModule;
-import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.modules.core.DeviceEventManagerModule;
-
-import java.util.Map;
+import java.util.Map
 
 class TestModuleModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
     
     init {
         // Here we\'re saving the context we passed into the constructor to a variable so we can emit events
         // https://facebook.github.io/react-native/docs/native-modules-android.html#the-toast-module
-        reactContext = context;
+        reactContext = context
     }
 
     override fun getName(): String {
@@ -70,9 +68,9 @@ class TestModuleModule(reactContext: ReactApplicationContext) : ReactContextBase
         // Export any constants to be used in your native module
         // https://facebook.github.io/react-native/docs/native-modules-android.html#the-toast-module
         val reactConstants = Map<String, Any>()
-        constants.put(\"EXAMPLE_CONSTANT\", \"example\");
+        constants.put(\"EXAMPLE_CONSTANT\", \"example\")
 
-        return constants;
+        return constants
     }
 
     @ReactMethod
@@ -98,15 +96,15 @@ class TestModuleModule(reactContext: ReactApplicationContext) : ReactContextBase
 exports[`Android/Kotlin creates a TemplatePackage.kt 1`] = `
 "//  Created by react-native-create-bridge
 
-package com.testapp.testmodule;
+package com.testapp.testmodule
 
-import com.facebook.react.ReactPackage;
-import com.facebook.react.bridge.JavaScriptModule;
-import com.facebook.react.bridge.NativeModule;
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.uimanager.ViewManager;
+import com.facebook.react.ReactPackage
+import com.facebook.react.bridge.JavaScriptModule
+import com.facebook.react.bridge.NativeModule
+import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.uimanager.ViewManager
 
-import java.util.Arrays;
+import java.util.Arrays
 
 class TestModulePackage : ReactPackage {
     

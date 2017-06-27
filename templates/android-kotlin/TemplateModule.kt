@@ -1,23 +1,21 @@
 //  Created by react-native-create-bridge
 
-package com.{{app}}.{{packageName}};
+package com.{{app}}.{{packageName}}
 
-import android.support.annotation.Nullable;
+import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.bridge.ReactContextBaseJavaModule
+import com.facebook.react.bridge.ReactMethod
+import com.facebook.react.bridge.WritableMap
+import com.facebook.react.modules.core.DeviceEventManagerModule
 
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContextBaseJavaModule;
-import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.modules.core.DeviceEventManagerModule;
-
-import java.util.Map;
+import java.util.Map
 
 class {{template}}Module(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
     
     init {
         // Here we're saving the context we passed into the constructor to a variable so we can emit events
         // https://facebook.github.io/react-native/docs/native-modules-android.html#the-toast-module
-        reactContext = context;
+        reactContext = context
     }
 
     override fun getName(): String {
@@ -30,9 +28,9 @@ class {{template}}Module(reactContext: ReactApplicationContext) : ReactContextBa
         // Export any constants to be used in your native module
         // https://facebook.github.io/react-native/docs/native-modules-android.html#the-toast-module
         val reactConstants = Map<String, Any>()
-        constants.put("EXAMPLE_CONSTANT", "example");
+        constants.put("EXAMPLE_CONSTANT", "example")
 
-        return constants;
+        return constants
     }
 
     @ReactMethod

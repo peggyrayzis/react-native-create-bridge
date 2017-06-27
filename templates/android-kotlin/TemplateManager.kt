@@ -1,13 +1,13 @@
 //  Created by react-native-create-bridge
 
-package com.{{app}}.{{packageName}};
+package com.{{app}}.{{packageName}}
 
-import android.view.View;
+import android.view.View
 
-import com.facebook.react.uimanager.SimpleViewManager;
-import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.SimpleViewManager
+import com.facebook.react.uimanager.ThemedReactContext
 
-import com.facebook.react.uimanager.annotations.ReactProp;
+import com.facebook.react.uimanager.annotations.ReactProp
 
 class {{template}}Manager : SimpleViewManager<View>() {
     
@@ -20,7 +20,7 @@ class {{template}}Manager : SimpleViewManager<View>() {
     public override fun createViewInstance(context: ThemedReactContext): View {
         // Create a view here
         // https://facebook.github.io/react-native/docs/native-components-android.html#2-implement-method-createviewinstance
-        return View(context);
+        return View(context)
     }
 
     @ReactProp(name = "exampleProp")
