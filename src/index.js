@@ -89,7 +89,9 @@ async function createJavaEnvironment(templateName) {
   );
   const paths = {
     readDirPath: path.join(__dirname, "..", "templates", "android-java"),
-    writeDirPath
+    writeDirPath: writeDirPath
+      ? writeDirPath
+      : path.join(appPath, templateName.toLowerCase())
   };
   const files = [
     "TemplatePackage.java",
@@ -121,7 +123,9 @@ async function createKotlinEnvironment(templateName) {
   );
   const paths = {
     readDirPath: path.join(__dirname, "..", "templates", "android-kotlin"),
-    writeDirPath
+    writeDirPath: writeDirPath
+      ? writeDirPath
+      : path.join(appPath, templateName.toLowerCase())
   };
   const files = [
     "TemplatePackage.kt",
