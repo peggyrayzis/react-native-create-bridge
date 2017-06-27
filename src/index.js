@@ -29,7 +29,7 @@ const promptConfig = [
     type: "checkbox",
     name: "environment",
     message: "What OS & languages would you like to support?",
-    default: ["Android/Java", "Android/Kotlin", "iOS/Swift", "iOS/Objective-C"],
+    default: ["Android/Java", "iOS/Objective-C"],
     choices: ["Android/Java", "Android/Kotlin", "iOS/Swift", "iOS/Objective-C"]
   },
   {
