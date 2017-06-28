@@ -58,6 +58,7 @@ Depending on your environment, there may be a couple more steps that you have to
 ## Goals
 - [x] Delivers bridge module in Obj-C, Swift, Kotlin, & Java
 - [x] Compatible with all versions of React Native, including v0.40+
+- [ ] Split out native UI components & modules into their own templates
 - [ ] Config to remove comments for more experienced users
 - [ ] Modifies existing project files (`AppDelegate.h`, `MainApplication.java`) to complete the bridging process
 - [ ] Your feature request could be here! Open up an issue and give us feedback 😊
