@@ -3,9 +3,9 @@
 import React, { Component } from 'react'
 import { requireNativeComponent } from 'react-native'
 
-const {{template}} = requireNativeComponent('{{template}}', null)
+const {{template}} = requireNativeComponent('{{template}}', {{template}}View)
 
-class {{template}}View extends Component {
+export default class {{template}}View extends Component {
   render () {
     return <{{template}} {...this.props} />
   }
@@ -14,5 +14,3 @@ class {{template}}View extends Component {
 {{template}}View.propTypes = {
   exampleProp: React.PropTypes.any
 }
-
-export default {{template}}View
