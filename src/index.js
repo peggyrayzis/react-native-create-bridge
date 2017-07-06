@@ -6,7 +6,7 @@ import isValid from "is-valid-path";
 import mkdir from "mkdirp-promise";
 import { success as successIcon, error as errorIcon } from "log-symbols";
 
-import readAndWriteFiles, { pkg } from "./file-operations";
+import readAndWriteFiles, { pkg, getFileNames } from "./file-operations";
 
 const templateNameRegex = /\w+/;
 const promptConfig = [
@@ -17,14 +17,13 @@ const promptConfig = [
     default: "ExampleBridge",
     validate: input => templateNameRegex.test(input)
   },
-  // TODO: split templates out into module / ui component folders
-  // {
-  //   type: 'checkbox',
-  //   name: 'bridgeType',
-  //   message: 'What type of bridge would you like to create?',
-  //   default: ['Native Module', 'Native UI Component'],
-  //   choices: ['Native Module', 'Native UI Component'],
-  // },
+  {
+    type: "checkbox",
+    name: "bridgeType",
+    message: "What type of bridge would you like to create?",
+    default: ["Native Module", "Native UI Component"],
+    choices: ["Native Module", "Native UI Component"]
+  },
   {
     type: "checkbox",
     name: "environment",
@@ -52,15 +51,20 @@ async function init() {
   try {
     const {
       environment,
-      // TODO: uncomment out once you split out bridge types
-      // bridgeType,
+      bridgeType,
       templateName,
       jsPath
     } = await inquirer.prompt(promptConfig);
 
-    const promises = environment.map(env => environmentMap[env](templateName));
+    const templateFolder = bridgeType.length > 1
+      ? "combined"
+      : bridgeType[0] === "Native Module" ? "modules" : "ui-components";
 
-    promises.push(createJSEnvironment(templateName, jsPath));
+    const promises = environment.map(env =>
+      environmentMap[env](templateName, templateFolder)
+    );
+
+    promises.push(createJSEnvironment(templateName, templateFolder, jsPath));
     await Promise.all(promises);
 
     console.log(
@@ -73,7 +77,7 @@ async function init() {
   }
 }
 
-async function createJavaEnvironment(templateName) {
+async function createJavaEnvironment(templateName, templateFolder) {
   const appPath = path.join(
     process.cwd(),
     "android",
@@ -84,20 +88,28 @@ async function createJavaEnvironment(templateName) {
     "com",
     pkg.name
   );
+
+  const readDirPath = path.join(
+    __dirname,
+    "..",
+    "templates",
+    templateFolder,
+    "android-java"
+  );
+
   const writeDirPath = await mkdir(
     path.join(appPath, templateName.toLowerCase())
   );
+
   const paths = {
-    readDirPath: path.join(__dirname, "..", "templates", "android-java"),
+    readDirPath,
     writeDirPath: writeDirPath
       ? writeDirPath
       : path.join(appPath, templateName.toLowerCase())
   };
-  const files = [
-    "TemplatePackage.java",
-    "TemplateModule.java",
-    "TemplateManager.java"
-  ];
+
+  const files = await getFileNames(readDirPath);
+
   return readAndWriteFiles(
     files,
     paths,
@@ -107,7 +119,7 @@ async function createJavaEnvironment(templateName) {
   );
 }
 
-async function createKotlinEnvironment(templateName) {
+async function createKotlinEnvironment(templateName, templateFolder) {
   const appPath = path.join(
     process.cwd(),
     "android",
@@ -118,20 +130,28 @@ async function createKotlinEnvironment(templateName) {
     "com",
     pkg.name
   );
+
+  const readDirPath = path.join(
+    __dirname,
+    "..",
+    "templates",
+    templateFolder,
+    "android-kotlin"
+  );
+
   const writeDirPath = await mkdir(
     path.join(appPath, templateName.toLowerCase())
   );
+
   const paths = {
-    readDirPath: path.join(__dirname, "..", "templates", "android-kotlin"),
+    readDirPath,
     writeDirPath: writeDirPath
       ? writeDirPath
       : path.join(appPath, templateName.toLowerCase())
   };
-  const files = [
-    "TemplatePackage.kt",
-    "TemplateModule.kt",
-    "TemplateManager.kt"
-  ];
+
+  const files = await getFileNames(readDirPath);
+
   return readAndWriteFiles(
     files,
     paths,
@@ -141,32 +161,62 @@ async function createKotlinEnvironment(templateName) {
   );
 }
 
-function createSwiftEnvironment(templateName) {
+async function createSwiftEnvironment(templateName, templateFolder) {
+  const readDirPath = path.join(
+    __dirname,
+    "..",
+    "templates",
+    templateFolder,
+    "ios-swift"
+  );
+
   const paths = {
-    readDirPath: path.join(__dirname, "..", "templates", "ios-swift"),
+    readDirPath,
     writeDirPath: path.join(process.cwd(), "ios")
   };
-  const files = ["Template.m", "TemplateManager.swift"];
+
+  const files = await getFileNames(readDirPath);
+
   return readAndWriteFiles(files, paths, templateName);
 }
 
-function createObjCEnvironment(templateName) {
+async function createObjCEnvironment(templateName, templateFolder) {
+  const readDirPath = path.join(
+    __dirname,
+    "..",
+    "templates",
+    templateFolder,
+    "ios-objc"
+  );
+
   const paths = {
-    readDirPath: path.join(__dirname, "..", "templates", "ios-objc"),
+    readDirPath,
     writeDirPath: path.join(process.cwd(), "ios")
   };
-  const files = ["Template.h", "TemplateManager.m"];
+
+  const files = await getFileNames(readDirPath);
+
   return readAndWriteFiles(files, paths, templateName);
 }
 
-async function createJSEnvironment(templateName, jsPath) {
+async function createJSEnvironment(templateName, templateFolder, jsPath) {
+  const readDirPath = path.join(
+    __dirname,
+    "..",
+    "templates",
+    templateFolder,
+    "js"
+  );
+
   await mkdir(jsPath);
 
   const paths = {
-    readDirPath: path.join(__dirname, "..", "templates", "js"),
+    readDirPath,
     writeDirPath: jsPath
   };
-  const files = ["TemplateNativeModule.js", "TemplateNativeView.js"];
+
+  const files = await getFileNames(readDirPath);
+
   return readAndWriteFiles(files, paths, templateName);
 }
 

@@ -13,7 +13,7 @@
     "package:dev": "npm unlink react-native-create-bridge && rm -rf node_modules && yarn && npm run build && npm link"
   },
   "lint-staged": {
-    "*.js": [
+    "src/*.js": [
       "prettier --write",
       "git add"
     ]
