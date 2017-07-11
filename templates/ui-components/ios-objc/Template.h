@@ -6,7 +6,7 @@
 @class RCTEventDispatcher;
 
 @interface {{template}} : UIView
-  // Define class properties here with @property
+  // Define view properties here with @property
   @property (nonatomic, assign) NSString *exampleProp;
 
   // Initializing with the event dispatcher allows us to communicate with JS

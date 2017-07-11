@@ -1,4 +1,5 @@
 //  Created by react-native-create-bridge
+// {{template}}-Bridging-Header.h
 
 // import RCTBridgeModule
 #if __has_include(<React/RCTBridgeModule.h>)
@@ -17,7 +18,3 @@
 #else
 #import “React/RCTEventEmitter.h” // Required when used as a Pod in a Swift project
 #endif
-
-@interface {{template}} : RCTEventEmitter <RCTBridgeModule>
-  // Define class properties here with @property
-@end

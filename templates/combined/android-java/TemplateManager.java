@@ -28,7 +28,7 @@ public class {{template}}Manager extends SimpleViewManager<View> {
 
     @ReactProp(name = "exampleProp")
     public void setExampleProp(View view, String prop) {
-        // Set properties from React onto your native component
+        // Set properties from React onto your native component via a setter method
         // https://facebook.github.io/react-native/docs/native-components-android.html#3-expose-view-property-setters-using-reactprop-or-reactpropgroup-annotation
     }
 }
