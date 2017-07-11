@@ -1,11 +1,12 @@
 # react-native-create-bridge
-React Native bridge modules made easy! If you're a JavaScript developer writing your first lines of native code or a more experienced developer looking to eliminate boilerplate from your React Native workflow, this tool is for you.
+Bridging native modules & UI components made easy! If you're a JavaScript developer writing your first lines of native code or a more experienced developer looking to eliminate boilerplate from your React Native workflow, this tool is for you.
 
 ## Getting Started
 1. `npm install -g react-native-create-bridge` or `yarn global add react-native-create-bridge`
 2. From the root of your React Native project, run `create-bridge`
 3. The prompts will ask you for:
   - Your bridge module name
+  - Whether you want to create a native module or UI component (or both!)
   - The platforms and languages you would like to support. Currently, we default to iOS/Obj-C and Android/Java, but you can also choose iOS/Swift or Android/Kotlin if you prefer.
   - The directory where you would like your JS files. If it doesn't exist, we'll create it for you.
 4. That's it! 📦 Sit back and we'll deliver your native module for you lightning fast! ⚡️
@@ -58,7 +59,7 @@ Depending on your environment, there may be a couple more steps that you have to
 ## Goals
 - [x] Delivers bridge module in Obj-C, Swift, Kotlin, & Java
 - [x] Compatible with all versions of React Native, including v0.40+
-- [ ] Split out native UI components & modules into their own templates
+- [x] Split out native UI components & modules into their own templates
 - [ ] Config to remove comments for more experienced users
 - [ ] Modifies existing project files (`AppDelegate.h`, `MainApplication.java`) to complete the bridging process
 - [ ] Your feature request could be here! Open up an issue and give us feedback 😊

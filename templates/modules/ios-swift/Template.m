@@ -18,6 +18,12 @@
 #import “React/RCTEventEmitter.h” // Required when used as a Pod in a Swift project
 #endif
 
-@interface {{template}} : RCTEventEmitter <RCTBridgeModule>
-  // Define class properties here with @property
+// Export a native module
+// https://facebook.github.io/react-native/docs/native-modules-ios.html#exporting-swift
+@interface RCT_EXTERN_MODULE({{template}}, NSObject)
+
+// Export methods to a native module
+// https://facebook.github.io/react-native/docs/native-modules-ios.html#exporting-swift
+RCT_EXTERN_METHOD(exampleMethod)
+
 @end
