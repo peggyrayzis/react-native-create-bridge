@@ -1,4 +1,4 @@
-exports[`JS creates a TemplateNativeModule.js 1`] = `
+exports[`JS: Combined creates a TemplateNativeModule.js 1`] = `
 "//  Created by react-native-create-bridge
 
 import { NativeModules } from \'react-native\'
@@ -15,15 +15,15 @@ export default {
 "
 `;
 
-exports[`JS creates a TemplateNativeView.js 1`] = `
+exports[`JS: Combined creates a TemplateNativeView.js 1`] = `
 "//  Created by react-native-create-bridge
 
 import React, { Component } from \'react\'
 import { requireNativeComponent } from \'react-native\'
 
-const TestModule = requireNativeComponent(\'TestModule\', null)
+const TestModule = requireNativeComponent(\'TestModule\', TestModuleView)
 
-class TestModuleView extends Component {
+export default class TestModuleView extends Component {
   render () {
     return <TestModule {...this.props} />
   }
@@ -32,7 +32,42 @@ class TestModuleView extends Component {
 TestModuleView.propTypes = {
   exampleProp: React.PropTypes.any
 }
+"
+`;
 
-export default TestModuleView
+exports[`JS: Native Modules creates a TemplateNativeModule.js 1`] = `
+"//  Created by react-native-create-bridge
+
+import { NativeModules } from \'react-native\'
+
+const { TestModule } = NativeModules
+
+export default {
+  exampleMethod () {
+    return TestModule.exampleMethod()
+  },
+
+  EXAMPLE_CONSTANT: TestModule.EXAMPLE_CONSTANT
+}
+"
+`;
+
+exports[`JS: UI Components creates a TemplateNativeView.js 1`] = `
+"//  Created by react-native-create-bridge
+
+import React, { Component } from \'react\'
+import { requireNativeComponent } from \'react-native\'
+
+const TestModule = requireNativeComponent(\'TestModule\', TestModuleView)
+
+export default class TestModuleView extends Component {
+  render () {
+    return <TestModule {...this.props} />
+  }
+}
+
+TestModuleView.propTypes = {
+  exampleProp: React.PropTypes.string
+}
 "
 `;

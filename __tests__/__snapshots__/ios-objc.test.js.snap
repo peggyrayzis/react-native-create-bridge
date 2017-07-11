@@ -1,4 +1,4 @@
-exports[`iOS/Obj-C creates a Template.h 1`] = `
+exports[`iOS/Obj-C: Combined creates a Template.h 1`] = `
 "//  Created by react-native-create-bridge
 
 // import RCTBridgeModule
@@ -16,7 +16,7 @@ exports[`iOS/Obj-C creates a Template.h 1`] = `
 "
 `;
 
-exports[`iOS/Obj-C creates a TemplateManager.m 1`] = `
+exports[`iOS/Obj-C: Combined creates a TemplateManager.m 1`] = `
 "//  Created by react-native-create-bridge
 
 #import \"TestModule.h\"
@@ -46,6 +46,8 @@ exports[`iOS/Obj-C creates a TemplateManager.m 1`] = `
 // https://facebook.github.io/react-native/docs/native-modules-ios.html
 RCT_EXPORT_MODULE();
 
+// Export constants
+// https://facebook.github.io/react-native/releases/next/docs/native-modules-ios.html#exporting-constants
 - (NSDictionary *)constantsToExport
 {
   return @{
@@ -73,6 +75,216 @@ RCT_EXPORT_METHOD(exampleMethod)
   // The bridge eventDispatcher is used to send events from native to JS env
   // No documentation yet on DeviceEventEmitter: https://github.com/facebook/react-native/issues/2819
   [self.bridge.eventDispatcher sendAppEventWithName: eventName body: params];
+}
+
+@end
+"
+`;
+
+exports[`iOS/Obj-C: Native Modules creates a Template.h 1`] = `
+"//  Created by react-native-create-bridge
+
+// import RCTBridgeModule
+#if __has_include(<React/RCTBridgeModule.h>)
+#import <React/RCTBridgeModule.h>
+#elif __has_include(“RCTBridgeModule.h”)
+#import “RCTBridgeModule.h”
+#else
+#import “React/RCTBridgeModule.h” // Required when used as a Pod in a Swift project
+#endif
+
+// import RCTEventEmitter
+#if __has_include(<React/RCTEventEmitter.h>)
+#import <React/RCTEventEmitter.h>
+#elif __has_include(“RCTEventEmitter.h”)
+#import “RCTEventEmitter.h”
+#else
+#import “React/RCTEventEmitter.h” // Required when used as a Pod in a Swift project
+#endif
+
+@interface TestModule : RCTEventEmitter <RCTBridgeModule>
+  // Define class properties here with @property
+@end
+"
+`;
+
+exports[`iOS/Obj-C: Native Modules creates a Template.m 1`] = `
+"//  Created by react-native-create-bridge
+
+#import \"TestModule.h\"
+
+// import RCTBridge
+#if __has_include(<React/RCTBridge.h>)
+#import <React/RCTBridge.h>
+#elif __has_include(“RCTBridge.h”)
+#import “RCTBridge.h”
+#else
+#import “React/RCTBridge.h” // Required when used as a Pod in a Swift project
+#endif
+
+// import RCTEventDispatcher
+#if __has_include(<React/RCTEventDispatcher.h>)
+#import <React/RCTEventDispatcher.h>
+#elif __has_include(“RCTEventDispatcher.h”)
+#import “RCTEventDispatcher.h”
+#else
+#import “React/RCTEventDispatcher.h” // Required when used as a Pod in a Swift project
+#endif
+
+@implementation TestModule
+@synthesize bridge = _bridge;
+
+// Export a native module
+// https://facebook.github.io/react-native/docs/native-modules-ios.html
+RCT_EXPORT_MODULE();
+
+// Export constants
+// https://facebook.github.io/react-native/releases/next/docs/native-modules-ios.html#exporting-constants
+- (NSDictionary *)constantsToExport
+{
+  return @{
+           @\"EXAMPLE\": @\"example\"
+         };
+}
+
+// Export methods to a native module
+// https://facebook.github.io/react-native/docs/native-modules-ios.html
+RCT_EXPORT_METHOD(exampleMethod)
+{
+  [self.emitMessageToRN:@\"EXAMPLE_EVENT\" :nil]
+}
+
+// List all your events here
+// https://facebook.github.io/react-native/releases/next/docs/native-modules-ios.html#sending-events-to-javascript
+- (NSArray<NSString *> *)supportedEvents
+{
+  return @[@\"SampleEvent\"];
+}
+
+#pragma mark - Private methods
+
+// Implement methods that you want to export to the native module
+- (void) emitMessageToRN: (NSString *)eventName :(NSDictionary *)params {
+  // The bridge eventDispatcher is used to send events from native to JS env
+  // No documentation yet on DeviceEventEmitter: https://github.com/facebook/react-native/issues/2819
+  [self sendEventWithName: eventName body: params];
+}
+
+@end
+"
+`;
+
+exports[`iOS/Obj-C: UI Components creates a Template.h 1`] = `
+"//  Created by react-native-create-bridge
+
+// import UIKit so you can subclass off UIView
+#import <UIKit/UIKit.h>
+
+@class RCTEventDispatcher;
+
+@interface TestModule : UIView
+  // Define view properties here with @property
+  @property (nonatomic, assign) NSString *exampleProp;
+
+  // Initializing with the event dispatcher allows us to communicate with JS
+  - (instancetype)initWithEventDispatcher:(RCTEventDispatcher *)eventDispatcher NS_DESIGNATED_INITIALIZER;
+
+@end
+"
+`;
+
+exports[`iOS/Obj-C: UI Components creates a Template.m 1`] = `
+"//  Created by react-native-create-bridge
+#import <Foundation/Foundation.h>
+#import \"TestModule.h\"
+
+// import RCTEventDispatcher
+#if __has_include(<React/RCTEventDispatcher.h>)
+#import <React/RCTEventDispatcher.h>
+#elif __has_include(“RCTEventDispatcher.h”)
+#import “RCTEventDispatcher.h”
+#else
+#import “React/RCTEventDispatcher.h” // Required when used as a Pod in a Swift project
+#endif
+
+
+@implementation TestModule : UIView  {
+
+  RCTEventDispatcher *_eventDispatcher;
+  
+}
+
+- (instancetype)initWithEventDispatcher:(RCTEventDispatcher *)eventDispatcher
+{
+  if ((self = [super init])) {
+    _eventDispatcher = eventDispatcher;
+  }
+    
+  return self;
+}
+
+@end"
+`;
+
+exports[`iOS/Obj-C: UI Components creates a TemplateManager.h 1`] = `
+"//  Created by react-native-create-bridge
+
+// import RCTViewManager
+#if __has_include(<React/RCTViewManager.h>)
+#import <React/RCTViewManager.h>
+#elif __has_include(“RCTViewManager.h”)
+#import “RCTViewManager.h”
+#else
+#import “React/RCTViewManager.h” // Required when used as a Pod in a Swift project
+#endif
+
+// Subclass your view manager off the RCTViewManager
+// http://facebook.github.io/react-native/docs/native-components-ios.html#ios-mapview-example
+@interface TestModuleManager : RCTViewManager
+
+@end
+"
+`;
+
+exports[`iOS/Obj-C: UI Components creates a TemplateManager.m 1`] = `
+"//  Created by react-native-create-bridge
+
+#import <Foundation/Foundation.h>
+#import \"TestModule.h\"
+#import \"TestModuleManager.h\"
+
+// import RCTBridge
+#if __has_include(<React/RCTBridge.h>)
+#import <React/RCTBridge.h>
+#elif __has_include(“RCTBridge.h”)
+#import “RCTBridge.h”
+#else
+#import “React/RCTBridge.h” // Required when used as a Pod in a Swift project
+#endif
+
+@implementation TestModuleManager
+
+@synthesize bridge = _bridge;
+
+// Export a native module
+// https://facebook.github.io/react-native/docs/native-modules-ios.html
+RCT_EXPORT_MODULE();
+
+// Return the native view that represents your React component
+- (UIView *)view
+{
+  return [[TestModule alloc] initWithEventDispatcher:self.bridge.eventDispatcher];
+}
+
+RCT_EXPORT_VIEW_PROPERTY(exampleProp, NSString)
+
+// Export constants
+// https://facebook.github.io/react-native/releases/next/docs/native-modules-ios.html#exporting-constants
+- (NSDictionary *)constantsToExport
+{
+  return @{
+           @\"EXAMPLE\": @\"example\"
+         };
 }
 
 @end

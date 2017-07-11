@@ -1,4 +1,4 @@
-exports[`Android/Kotlin creates a TemplateManager.kt 1`] = `
+exports[`Android/Kotlin: Combined creates a TemplateManager.kt 1`] = `
 "//  Created by react-native-create-bridge
 
 package com.testapp.testmodule
@@ -37,7 +37,7 @@ class TestModuleManager : SimpleViewManager<View>() {
 "
 `;
 
-exports[`Android/Kotlin creates a TemplateModule.kt 1`] = `
+exports[`Android/Kotlin: Combined creates a TemplateModule.kt 1`] = `
 "//  Created by react-native-create-bridge
 
 package com.testapp.testmodule
@@ -93,7 +93,7 @@ class TestModuleModule(reactContext: ReactApplicationContext) : ReactContextBase
 "
 `;
 
-exports[`Android/Kotlin creates a TemplatePackage.kt 1`] = `
+exports[`Android/Kotlin: Combined creates a TemplatePackage.kt 1`] = `
 "//  Created by react-native-create-bridge
 
 package com.testapp.testmodule
@@ -109,11 +109,176 @@ import java.util.Arrays
 class TestModulePackage : ReactPackage {
     
     override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
-      // Register your native module
-      // https://facebook.github.io/react-native/docs/native-modules-android.html#register-the-module
+        // Register your native module
+        // https://facebook.github.io/react-native/docs/native-modules-android.html#register-the-module
         return Arrays.asList<NativeModule>(
             TestModuleModule(reactContext)
         )
+    }
+
+    override fun createJSModules(): List<Class<out JavaScriptModule>> {
+        return emptyList()
+    }
+
+    override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
+        // https://facebook.github.io/react-native/docs/native-components-android.html#4-register-the-viewmanager
+        // Register your native component\'s view manager
+        return Arrays.asList<ViewManager<*, *>>(
+            TestModuleManager()
+        )
+    }
+
+}
+"
+`;
+
+exports[`Android/Kotlin: Native Modules creates a TemplateModule.kt 1`] = `
+"//  Created by react-native-create-bridge
+
+package com.testapp.testmodule
+
+import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.bridge.ReactContextBaseJavaModule
+import com.facebook.react.bridge.ReactMethod
+import com.facebook.react.bridge.WritableMap
+import com.facebook.react.modules.core.DeviceEventManagerModule
+
+import java.util.Map
+
+class TestModuleModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
+    
+    init {
+        // Here we\'re saving the context we passed into the constructor to a variable so we can emit events
+        // https://facebook.github.io/react-native/docs/native-modules-android.html#the-toast-module
+        reactContext = context
+    }
+
+    override fun getName(): String {
+        // Tell React the name of the module
+        // https://facebook.github.io/react-native/docs/native-components-android.html#1-create-the-viewmanager-subclass
+        return REACT_CLASS
+    }
+
+    override fun getConstants(): Map<String, Any>? {
+        // Export any constants to be used in your native module
+        // https://facebook.github.io/react-native/docs/native-modules-android.html#the-toast-module
+        val reactConstants = Map<String, Any>()
+        constants.put(\"EXAMPLE_CONSTANT\", \"example\")
+
+        return constants
+    }
+
+    @ReactMethod
+    fun exampleMethod () {
+        // An example native method that you will expose to React
+        // https://facebook.github.io/react-native/docs/native-modules-android.html#the-toast-module
+    }
+
+    companion object {
+        val REACT_CLASS = \"TestModule\"
+        private var reactContext: ReactApplicationContext = null
+
+        private fun emitDeviceEvent(eventName: String, eventData: WritableMap?) {
+            // A method for emitting from the native side to JS
+            // https://facebook.github.io/react-native/docs/native-modules-android.html#sending-events-to-javascript
+            reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java).emit(eventName, eventData)
+        }
+    }
+}
+"
+`;
+
+exports[`Android/Kotlin: Native Modules creates a TemplatePackage.kt 1`] = `
+"//  Created by react-native-create-bridge
+
+package com.testapp.testmodule
+
+import com.facebook.react.ReactPackage
+import com.facebook.react.bridge.JavaScriptModule
+import com.facebook.react.bridge.NativeModule
+import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.uimanager.ViewManager
+
+import java.util.Arrays
+
+class TestModulePackage : ReactPackage {
+    
+    override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
+        // Register your native module
+        // https://facebook.github.io/react-native/docs/native-modules-android.html#register-the-module
+        return Arrays.asList<NativeModule>(
+            TestModuleModule(reactContext)
+        )
+    }
+
+    override fun createJSModules(): List<Class<out JavaScriptModule>> {
+        return emptyList()
+    }
+
+    override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
+        return emptyList()
+    }
+
+}
+"
+`;
+
+exports[`Android/Kotlin: UI Components creates a TemplateManager.kt 1`] = `
+"//  Created by react-native-create-bridge
+
+package com.testapp.testmodule
+
+import android.view.View
+
+import com.facebook.react.uimanager.SimpleViewManager
+import com.facebook.react.uimanager.ThemedReactContext
+
+import com.facebook.react.uimanager.annotations.ReactProp
+
+class TestModuleManager : SimpleViewManager<View>() {
+    
+    override fun getName(): String {
+        // Tell React the name of the module
+        // https://facebook.github.io/react-native/docs/native-components-android.html#1-create-the-viewmanager-subclass
+        return REACT_CLASS
+    }
+
+    public override fun createViewInstance(context: ThemedReactContext): View {
+        // Create a view here
+        // https://facebook.github.io/react-native/docs/native-components-android.html#2-implement-method-createviewinstance
+        return View(context)
+    }
+
+    @ReactProp(name = \"exampleProp\")
+    fun setExampleProp(View view, String prop) {
+        // Set properties from React onto your native component
+        // https://facebook.github.io/react-native/docs/native-components-android.html#3-expose-view-property-setters-using-reactprop-or-reactpropgroup-annotation
+    }
+
+    companion object {
+        val REACT_CLASS = \"TestModule\"
+    }
+}
+"
+`;
+
+exports[`Android/Kotlin: UI Components creates a TemplatePackage.kt 1`] = `
+"//  Created by react-native-create-bridge
+
+package com.testapp.testmodule
+
+import com.facebook.react.ReactPackage
+import com.facebook.react.bridge.JavaScriptModule
+import com.facebook.react.bridge.NativeModule
+import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.uimanager.ViewManager
+
+import java.util.Arrays
+
+class TestModulePackage : ReactPackage {
+    
+    override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
+        return emptyList()
     }
 
     override fun createJSModules(): List<Class<out JavaScriptModule>> {
