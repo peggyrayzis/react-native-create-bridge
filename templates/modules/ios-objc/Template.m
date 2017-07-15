@@ -40,7 +40,7 @@ RCT_EXPORT_MODULE();
 // https://facebook.github.io/react-native/docs/native-modules-ios.html
 RCT_EXPORT_METHOD(exampleMethod)
 {
-  [self.emitMessageToRN:@"EXAMPLE_EVENT" :nil]
+  [self emitMessageToRN:@"EXAMPLE_EVENT" :nil];
 }
 
 // List all your events here
