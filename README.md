@@ -77,5 +77,7 @@ Depending on your environment, there may be a couple more steps that you have to
 ## Contributing
 `react-native-create-bridge` is a new project and we would love feedback from the community on how it should evolve. Please report any 🐞s and let us know how you're using `react-native-create-bridge`!
 
+If you would like to contribute, please read the [contributor guidelines](https://github.com/peggyrayzis/react-native-create-bridge/blob/master/CONTRIBUTING.md) first.
+
 This project adheres to the Contributor Covenant [code of conduct](http://contributor-covenant.org/version/1/3/0/).
 By participating, you are expected to uphold this code. Please report unacceptable behavior to peggyrayzis@gmail.com.
