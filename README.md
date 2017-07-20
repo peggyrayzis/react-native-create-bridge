@@ -49,10 +49,6 @@ Depending on your environment, there may be a couple more steps that you have to
   ```
   - Import your package at the top: `import com.yourapp.yourmodule.YourModulePackage`
 
-#### iOS/Obj-C
-  - To complete the bridging process, look for `AppDelegate.h` in `ios/yourapp`
-  - Add `#import <YourModule/YourModule.h>` to the top of the file
-
 #### iOS/Swift
   - If this is your first Swift module in your project, you will need to make sure you have a Obj-C bridging header to expose any Obj-C code to Swift. Read [Importing Obj-C into Swift](https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html) to learn more.
 
