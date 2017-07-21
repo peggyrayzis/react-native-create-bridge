@@ -48,6 +48,9 @@ Depending on your environment, there may be a couple more steps that you have to
   }
   ```
   - Import your package at the top: `import com.yourapp.yourmodule.YourModulePackage`
+  
+#### iOS/Swift
+  - Currently, you will need to add the files manually to your project in Xcode. Right click on the folder with your app name and select `Add Files To YourApp`. Select the files associated with your module and click `Add`
 
 #### iOS/Swift
   - If this is your first Swift module in your project, you will need to make sure you have a Obj-C bridging header to expose any Obj-C code to Swift. Read [Importing Obj-C into Swift](https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html) to learn more.
