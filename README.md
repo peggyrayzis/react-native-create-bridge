@@ -48,10 +48,9 @@ Depending on your environment, there may be a couple more steps that you have to
   }
   ```
   - Import your package at the top: `import com.yourapp.yourmodule.YourModulePackage`
-
+  
 #### iOS/Obj-C
-  - To complete the bridging process, look for `AppDelegate.h` in `ios/yourapp`
-  - Add `#import <YourModule/YourModule.h>` to the top of the file
+  - Currently, you will need to add the files manually to your project in Xcode. Right click on the folder with your app name and select `Add Files To YourApp`. Select the files associated with your module and click `Add`
 
 #### iOS/Swift
   - If this is your first Swift module in your project, you will need to make sure you have a Obj-C bridging header to expose any Obj-C code to Swift. Read [Importing Obj-C into Swift](https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html) to learn more.
@@ -76,6 +75,8 @@ Depending on your environment, there may be a couple more steps that you have to
 
 ## Contributing
 `react-native-create-bridge` is a new project and we would love feedback from the community on how it should evolve. Please report any 🐞s and let us know how you're using `react-native-create-bridge`!
+
+If you would like to contribute, please read the [contributor guidelines](https://github.com/peggyrayzis/react-native-create-bridge/blob/master/CONTRIBUTING.md) first.
 
 This project adheres to the Contributor Covenant [code of conduct](http://contributor-covenant.org/version/1/3/0/).
 By participating, you are expected to uphold this code. Please report unacceptable behavior to peggyrayzis@gmail.com.

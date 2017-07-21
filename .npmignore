@@ -2,3 +2,5 @@ src/
 node_modules/
 .git/
 __tests__/
+.travis.yml
+.github/
