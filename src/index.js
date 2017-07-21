@@ -33,6 +33,13 @@ const promptConfig = [
   },
   {
     type: "input",
+    name: "nativePath",
+    message: "What directory should we deliver your native files to?",
+    default: "ios|android",
+    validate: input => isValid(input)
+  },
+  {
+    type: "input",
     name: "jsPath",
     message: "What directory should we deliver your JS files to?",
     default: ".",
@@ -53,6 +60,7 @@ async function init() {
       environment,
       bridgeType,
       templateName,
+      nativePath,
       jsPath
     } = await inquirer.prompt(promptConfig);
 
@@ -61,7 +69,7 @@ async function init() {
       : bridgeType[0] === "Native Module" ? "modules" : "ui-components";
 
     const promises = environment.map(env =>
-      environmentMap[env](templateName, templateFolder)
+      environmentMap[env](templateName, templateFolder, nativePath)
     );
 
     promises.push(createJSEnvironment(templateName, templateFolder, jsPath));
@@ -77,7 +85,7 @@ async function init() {
   }
 }
 
-async function createJavaEnvironment(templateName, templateFolder) {
+async function createJavaEnvironment(templateName, templateFolder, nativePath) {
   const appPath = path.join(
     process.cwd(),
     "android",
@@ -119,7 +127,11 @@ async function createJavaEnvironment(templateName, templateFolder) {
   );
 }
 
-async function createKotlinEnvironment(templateName, templateFolder) {
+async function createKotlinEnvironment(
+  templateName,
+  templateFolder,
+  nativePath
+) {
   const appPath = path.join(
     process.cwd(),
     "android",
@@ -161,7 +173,11 @@ async function createKotlinEnvironment(templateName, templateFolder) {
   );
 }
 
-async function createSwiftEnvironment(templateName, templateFolder) {
+async function createSwiftEnvironment(
+  templateName,
+  templateFolder,
+  nativePath
+) {
   const readDirPath = path.join(
     __dirname,
     "..",
@@ -170,9 +186,16 @@ async function createSwiftEnvironment(templateName, templateFolder) {
     "ios-swift"
   );
 
+  if (nativePath === "ios|android") {
+    nativePath = "ios";
+  } else {
+    nativePath = path.join(process.cwd(), "ios", nativePath);
+    await mkdir(nativePath);
+  }
+
   const paths = {
     readDirPath,
-    writeDirPath: path.join(process.cwd(), "ios")
+    writeDirPath: nativePath
   };
 
   const files = await getFileNames(readDirPath);
@@ -180,7 +203,7 @@ async function createSwiftEnvironment(templateName, templateFolder) {
   return readAndWriteFiles(files, paths, templateName);
 }
 
-async function createObjCEnvironment(templateName, templateFolder) {
+async function createObjCEnvironment(templateName, templateFolder, nativePath) {
   const readDirPath = path.join(
     __dirname,
     "..",
@@ -189,9 +212,16 @@ async function createObjCEnvironment(templateName, templateFolder) {
     "ios-objc"
   );
 
+  if (nativePath === "ios|android") {
+    nativePath = "ios";
+  } else {
+    nativePath = path.join(process.cwd(), "ios", nativePath);
+    await mkdir(nativePath);
+  }
+
   const paths = {
     readDirPath,
-    writeDirPath: path.join(process.cwd(), "ios")
+    writeDirPath: nativePath
   };
 
   const files = await getFileNames(readDirPath);
