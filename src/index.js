@@ -30,20 +30,6 @@ const promptConfig = [
     message: "What OS & languages would you like to support?",
     default: ["Android/Java", "iOS/Objective-C"],
     choices: ["Android/Java", "Android/Kotlin", "iOS/Swift", "iOS/Objective-C"]
-  },
-  {
-    type: "input",
-    name: "nativePath",
-    message: "What directory should we deliver your native files to?",
-    default: "ios|android",
-    validate: input => isValid(input)
-  },
-  {
-    type: "input",
-    name: "jsPath",
-    message: "What directory should we deliver your JS files to?",
-    default: ".",
-    validate: input => isValid(input)
   }
 ];
 
@@ -56,21 +42,42 @@ const environmentMap = {
 
 async function init() {
   try {
-    const {
-      environment,
-      bridgeType,
-      templateName,
-      nativePath,
-      jsPath
-    } = await inquirer.prompt(promptConfig);
+    const { environment, bridgeType, templateName } = await inquirer.prompt(
+      promptConfig
+    );
+
+    const fileTypes = ["JS"];
+    const includediOS = environment.find(
+      answer => answer.indexOf("iOS") !== -1
+    );
+    if (includediOS) fileTypes.unshift("iOS");
+    const includedAndroid = environment.find(
+      answer => answer.indexOf("Android") !== -1
+    );
+    if (includedAndroid) fileTypes.unshift("Android");
+
+    const extraPromptConfig = fileTypes.map(fileType => {
+      return {
+        type: "input",
+        name: `${fileType.toLowerCase()}Path`,
+        message: `What directory should we deliver your ${fileType} files to?`,
+        default: fileType === "JS" ? "." : fileType.toLowerCase(),
+        validate: input => isValid(input)
+      };
+    });
+
+    const { iosPath, androidPath, jsPath } = await inquirer.prompt(
+      extraPromptConfig
+    );
 
     const templateFolder = bridgeType.length > 1
       ? "combined"
       : bridgeType[0] === "Native Module" ? "modules" : "ui-components";
 
-    const promises = environment.map(env =>
-      environmentMap[env](templateName, templateFolder, nativePath)
-    );
+    const promises = environment.map(env => {
+      const nativePath = env.indexOf("iOS") !== -1 ? iosPath : androidPath;
+      return environmentMap[env](templateName, templateFolder, nativePath);
+    });
 
     promises.push(createJSEnvironment(templateName, templateFolder, jsPath));
     await Promise.all(promises);
@@ -186,9 +193,7 @@ async function createSwiftEnvironment(
     "ios-swift"
   );
 
-  if (nativePath === "ios|android") {
-    nativePath = "ios";
-  } else {
+  if (nativePath !== "ios") {
     nativePath = path.join(process.cwd(), "ios", nativePath);
     await mkdir(nativePath);
   }
@@ -212,9 +217,7 @@ async function createObjCEnvironment(templateName, templateFolder, nativePath) {
     "ios-objc"
   );
 
-  if (nativePath === "ios|android") {
-    nativePath = "ios";
-  } else {
+  if (nativePath !== "ios") {
     nativePath = path.join(process.cwd(), "ios", nativePath);
     await mkdir(nativePath);
   }
