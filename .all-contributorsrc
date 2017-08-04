@@ -33,6 +33,17 @@
       "contributions": [
         "question"
       ]
+    },
+    {
+      "login": "peggyrayzis",
+      "name": "Peggy Rayzis",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/18017067?v=4",
+      "profile": "https://twitter.com/peggyrayzis",
+      "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
     }
   ]
 }
