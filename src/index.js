@@ -56,9 +56,10 @@ async function init() {
       jsPath
     } = await inquirer.prompt(promptConfig);
 
-    const templateFolder = bridgeType.length > 1
-      ? "combined"
-      : bridgeType[0] === "Native Module" ? "modules" : "ui-components";
+    const templateFolder =
+      bridgeType.length > 1
+        ? "combined"
+        : bridgeType[0] === "Native Module" ? "modules" : "ui-components";
 
     const promises = environment.map(env =>
       environmentMap[env](templateName, templateFolder)
@@ -220,4 +221,9 @@ async function createJSEnvironment(templateName, templateFolder, jsPath) {
   return readAndWriteFiles(files, paths, templateName);
 }
 
-init();
+module.exports = {
+  name: "create-bridge",
+  description:
+    "generates boilerplate native code templates to be bridged to react native",
+  run: init
+};

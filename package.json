@@ -61,5 +61,8 @@
       ]
     ],
     "plugins": ["transform-runtime"]
+  },
+  "rnpm": {
+    "plugin:": "./src/index.js"
   }
 }
