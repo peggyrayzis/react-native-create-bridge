@@ -1,12 +1,15 @@
 #! /usr/bin/env node
+const inquirer = require("inquirer");
+const path = require("path");
+const isValid = require("is-valid-path");
+const mkdir = require("mkdirp-promise");
+const logSymbols = require("log-symbols");
 
-import inquirer from "inquirer";
-import path from "path";
-import isValid from "is-valid-path";
-import mkdir from "mkdirp-promise";
-import { success as successIcon, error as errorIcon } from "log-symbols";
+const successIcon = logSymbols.success;
+const errorIcon = logSymbols.error;
 
-import readAndWriteFiles, { pkg, getFileNames } from "./file-operations";
+const readAndWriteFiles = require("./file-operations");
+const { pkg, getFileNames } = readAndWriteFiles;
 
 const templateNameRegex = /\w+/;
 const promptConfig = [
@@ -47,35 +50,40 @@ const environmentMap = {
   "iOS/Objective-C": createObjCEnvironment
 };
 
-async function init() {
-  try {
-    const {
-      environment,
-      bridgeType,
-      templateName,
-      jsPath
-    } = await inquirer.prompt(promptConfig);
+function init() {
+  inquirer
+    .prompt(promptConfig)
+    .then(result => {
+      const { environment, bridgeType, templateName, jsPath } = result;
 
-    const templateFolder =
-      bridgeType.length > 1
-        ? "combined"
-        : bridgeType[0] === "Native Module" ? "modules" : "ui-components";
+      const templateFolder =
+        bridgeType.length > 1
+          ? "combined"
+          : bridgeType[0] === "Native Module" ? "modules" : "ui-components";
 
-    const promises = environment.map(env =>
-      environmentMap[env](templateName, templateFolder)
-    );
+      const promises = environment.map(env =>
+        environmentMap[env](templateName, templateFolder)
+      );
 
-    promises.push(createJSEnvironment(templateName, templateFolder, jsPath));
-    await Promise.all(promises);
+      promises.push(createJSEnvironment(templateName, templateFolder, jsPath));
 
-    console.log(
-      `${successIcon} Your bridge module was successfully created! 🎉`
-    );
-  } catch (e) {
-    console.log(
-      `${errorIcon} Oh no! 💩  Something went wrong with creating your bridge module.\nPlease report any errors here: https://github.com/peggyrayzis/react-native-create-bridge/issues\n\nError: ${e}`
-    );
-  }
+      Promise.all(promises)
+        .then(() => {
+          console.log(
+            `${successIcon} Your bridge module was successfully created! 🎉`
+          );
+        })
+        .catch(() => {
+          console.log(
+            `${errorIcon} Oh no! 💩  Something went wrong with creating your bridge module.\nPlease report any errors here: https://github.com/peggyrayzis/react-native-create-bridge/issues\n\nError: ${e}`
+          );
+        });
+    })
+    .catch(() => {
+      console.log(
+        `${errorIcon} Oh no! 💩  Something went wrong with creating your bridge module.\nPlease report any errors here: https://github.com/peggyrayzis/react-native-create-bridge/issues\n\nError: ${e}`
+      );
+    });
 }
 
 async function createJavaEnvironment(templateName, templateFolder) {
