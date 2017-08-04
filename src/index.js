@@ -50,6 +50,12 @@ const environmentMap = {
   "iOS/Objective-C": createObjCEnvironment
 };
 
+function logError() {
+  console.log(
+    `${errorIcon} Oh no! 💩  Something went wrong with creating your bridge module.\nPlease report any errors here: https://github.com/peggyrayzis/react-native-create-bridge/issues\n\nError: ${e}`
+  );
+}
+
 function init() {
   inquirer
     .prompt(promptConfig)
@@ -74,15 +80,11 @@ function init() {
           );
         })
         .catch(() => {
-          console.log(
-            `${errorIcon} Oh no! 💩  Something went wrong with creating your bridge module.\nPlease report any errors here: https://github.com/peggyrayzis/react-native-create-bridge/issues\n\nError: ${e}`
-          );
+          logError();
         });
     })
     .catch(() => {
-      console.log(
-        `${errorIcon} Oh no! 💩  Something went wrong with creating your bridge module.\nPlease report any errors here: https://github.com/peggyrayzis/react-native-create-bridge/issues\n\nError: ${e}`
-      );
+      logError();
     });
 }
 
