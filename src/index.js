@@ -99,7 +99,9 @@ function createJavaEnvironment(templateName, templateFolder) {
     "android-java"
   );
 
-  mkdir(path.join(appPath, templateName.toLowerCase())).then(writeDirPath => {
+  return mkdir(
+    path.join(appPath, templateName.toLowerCase())
+  ).then(writeDirPath => {
     const paths = {
       readDirPath,
       writeDirPath: writeDirPath
