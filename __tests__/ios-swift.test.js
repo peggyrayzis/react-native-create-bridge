@@ -1,5 +1,7 @@
 import path from 'path';
-import { readFile, parseFile } from '../src/file-operations';
+
+const fileOperations = require('../src/file-operations');
+const { readFile, parseFile } = fileOperations;
 
 describe('iOS/Swift: UI Components', () => {
   const templateName = 'TestModule';

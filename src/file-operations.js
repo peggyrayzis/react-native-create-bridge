@@ -3,29 +3,24 @@ const fs = require("mz/fs");
 
 exports.pkg = require(path.join(process.cwd(), "package.json"));
 
-exports.getFileNames = function getFileNames(dirPath) {
+function getFileNames(dirPath) {
   return fs.readdir(dirPath).catch(e => console.error("[getFileNames] ", e));
-};
+}
 
-exports.readFile = function readFile(file, readDirPath) {
+function readFile(file, readDirPath) {
   return fs
     .readFile(path.join(readDirPath, file), "utf-8")
     .catch(e => console.error("[readFile] ", e));
-};
+}
 
-exports.parseFile = function parseFile(
-  fileData,
-  templateName,
-  packageName = null,
-  app = null
-) {
+function parseFile(fileData, templateName, packageName = null, app = null) {
   return fileData
     .replace(/{{template}}/g, templateName)
     .replace(/{{packageName}}/g, packageName)
     .replace(/{{app}}/g, app);
-};
+}
 
-module.exports = function readAndWriteFiles(
+function readAndWriteFiles(
   files,
   paths,
   templateName,
@@ -42,4 +37,11 @@ module.exports = function readAndWriteFiles(
       });
     })
   ).catch(e => console.error("[readAndWriteFiles] ", e));
+}
+
+module.exports = {
+  getFileNames,
+  readFile,
+  parseFile,
+  readAndWriteFiles
 };
