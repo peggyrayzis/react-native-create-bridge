@@ -1,23 +1,19 @@
-import path from "path";
-import fs from "mz/fs";
+const path = require("path");
+const fs = require("mz/fs");
 
-export const pkg = require(path.join(process.cwd(), "package.json"));
+exports.pkg = require(path.join(process.cwd(), "package.json"));
 
-export async function getFileNames(dirPath) {
-  const fileNames = await fs
-    .readdir(dirPath)
-    .catch(e => console.error("[getFileNames] ", e));
-  return fileNames;
-}
+exports.getFileNames = function getFileNames(dirPath) {
+  return fs.readdir(dirPath).catch(e => console.error("[getFileNames] ", e));
+};
 
-export async function readFile(file, readDirPath) {
-  const fileData = await fs
+exports.readFile = function readFile(file, readDirPath) {
+  return fs
     .readFile(path.join(readDirPath, file), "utf-8")
     .catch(e => console.error("[readFile] ", e));
-  return fileData;
-}
+};
 
-export function parseFile(
+exports.parseFile = function parseFile(
   fileData,
   templateName,
   packageName = null,
@@ -27,9 +23,9 @@ export function parseFile(
     .replace(/{{template}}/g, templateName)
     .replace(/{{packageName}}/g, packageName)
     .replace(/{{app}}/g, app);
-}
+};
 
-export default function readAndWriteFiles(
+module.exports = function readAndWriteFiles(
   files,
   paths,
   templateName,
@@ -38,11 +34,12 @@ export default function readAndWriteFiles(
 ) {
   const { readDirPath, writeDirPath } = paths;
   return Promise.all(
-    files.map(async file => {
-      const fileData = await readFile(file, readDirPath);
-      const parsedFile = parseFile(fileData, templateName, packageName, app);
-      const fileName = file.replace("Template", templateName);
-      return fs.writeFile(path.join(writeDirPath, fileName), parsedFile);
+    files.map(file => {
+      readFile(file, readDirPath).then(fileData => {
+        const parsedFile = parseFile(fileData, templateName, packageName, app);
+        const fileName = file.replace("Template", templateName);
+        return fs.writeFile(path.join(writeDirPath, fileName), parsedFile);
+      });
     })
   ).catch(e => console.error("[readAndWriteFiles] ", e));
-}
+};
