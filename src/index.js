@@ -99,26 +99,24 @@ function createJavaEnvironment(templateName, templateFolder) {
     "android-java"
   );
 
-  return mkdir(
-    path.join(appPath, templateName.toLowerCase()).then(writeDirPath => {
-      const paths = {
-        readDirPath,
-        writeDirPath: writeDirPath
-          ? writeDirPath
-          : path.join(appPath, templateName.toLowerCase())
-      };
+  mkdir(path.join(appPath, templateName.toLowerCase())).then(writeDirPath => {
+    const paths = {
+      readDirPath,
+      writeDirPath: writeDirPath
+        ? writeDirPath
+        : path.join(appPath, templateName.toLowerCase())
+    };
 
-      return getFileNames(readDirPath).then(files =>
-        readAndWriteFiles(
-          files,
-          paths,
-          templateName,
-          templateName.toLowerCase(),
-          pkg.name.toLowerCase()
-        )
-      );
-    })
-  );
+    getFileNames(readDirPath).then(files =>
+      readAndWriteFiles(
+        files,
+        paths,
+        templateName,
+        templateName.toLowerCase(),
+        pkg.name.toLowerCase()
+      )
+    );
+  });
 }
 
 function createKotlinEnvironment(templateName, templateFolder) {
