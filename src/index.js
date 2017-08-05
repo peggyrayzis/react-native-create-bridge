@@ -7,8 +7,8 @@ const logSymbols = require("log-symbols");
 const successIcon = logSymbols.success;
 const errorIcon = logSymbols.error;
 
-const readAndWriteFiles = require("./file-operations");
-const { pkg, getFileNames } = readAndWriteFiles;
+const fileOperations = require("./file-operations");
+const { pkg, getFileNames, readAndWriteFiles } = fileOperations;
 
 const templateNameRegex = /\w+/;
 const promptConfig = [

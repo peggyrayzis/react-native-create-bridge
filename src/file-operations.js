@@ -1,7 +1,7 @@
 const path = require("path");
 const fs = require("mz/fs");
 
-exports.pkg = require(path.join(process.cwd(), "package.json"));
+const pkg = require(path.join(process.cwd(), "package.json"));
 
 function getFileNames(dirPath) {
   return fs.readdir(dirPath).catch(e => console.error("[getFileNames] ", e));
@@ -40,6 +40,7 @@ function readAndWriteFiles(
 }
 
 module.exports = {
+  pkg,
   getFileNames,
   readFile,
   parseFile,
