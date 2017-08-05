@@ -225,6 +225,6 @@ function createJSEnvironment(templateName, templateFolder, jsPath) {
 module.exports = {
   name: "create-bridge",
   description:
-    "A CLI tool that bridges React Native modules & UI components with ease",
+    "A React Native plugin that bridges React Native modules & UI components with ease",
   func: init
 };
