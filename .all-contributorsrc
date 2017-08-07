@@ -44,6 +44,15 @@
         "doc",
         "review"
       ]
+    },
+    {
+      "login": "Air-Miha",
+      "name": "Mihovil",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/24268882?v=4",
+      "profile": "https://github.com/Air-Miha",
+      "contributions": [
+        "blog"
+      ]
     }
   ]
 }
