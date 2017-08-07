@@ -2,8 +2,8 @@
 Bridging native modules & UI components made easy! If you're a JavaScript developer writing your first lines of native code or a more experienced developer looking to eliminate boilerplate from your React Native workflow, this tool is for you.
 
 ## Getting Started
-1. `npm install -g react-native-create-bridge` or `yarn global add react-native-create-bridge`
-2. From the root of your React Native project, run `create-bridge`
+1. `npm install -s react-native-create-bridge` or `yarn add react-native-create-bridge`
+2. From the root of your React Native project, run `react-native create-bridge`
 3. The prompts will ask you for:
   - Your bridge module name
   - Whether you want to create a native module or UI component (or both!)
@@ -48,7 +48,7 @@ Depending on your environment, there may be a couple more steps that you have to
   }
   ```
   - Import your package at the top: `import com.yourapp.yourmodule.YourModulePackage`
-  
+
 #### iOS/Obj-C
   - Currently, you will need to add the files manually to your project in Xcode. Right click on the folder with your app name and select `Add Files To YourApp`. Select the files associated with your module and click `Add`
 
@@ -69,7 +69,7 @@ Depending on your environment, there may be a couple more steps that you have to
 2. `cd` to where you cloned it
 3. `npm install` or `yarn`
 4. After you make changes, link your local package by running `npm run package:dev`
-5. You can now run `create-bridge` locally in a React Native project to test your changes
+5. You can now run `react-native create-bridge` locally in a React Native project to test your changes
 6. `npm run test` will run the Jest test suite
 
 
