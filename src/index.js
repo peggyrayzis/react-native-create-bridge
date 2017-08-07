@@ -4,7 +4,7 @@ const isValid = require("is-valid-path");
 const mkdir = require("mkdirp-promise");
 const logSymbols = require("log-symbols");
 
-const { successIcon, errorIcon } = logSymbols;
+const { success: successIcon, error: errorIcon } = logSymbols;
 
 const fileOperations = require("./file-operations");
 const { pkg, getFileNames, readAndWriteFiles } = fileOperations;
