@@ -56,7 +56,7 @@ RCT_EXPORT_METHOD(exampleMethod)
 - (void) emitMessageToRN: (NSString *)eventName :(NSDictionary *)params {
   // The bridge eventDispatcher is used to send events from native to JS env
   // Documentation on DeviceEventEmitter:
-  // https://facebook.github.io/react-native/docs/native-modules-android.html#sending-events-to-javascript
+  // https://facebook.github.io/react-native/docs/native-modules-ios.html#sending-events-to-javascript
   [self sendEventWithName: eventName body: params];
 }
 
