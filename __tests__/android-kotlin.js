@@ -10,26 +10,22 @@ describe('Android/Kotlin: UI Components', () => {
     'ui-components',
     'android-kotlin',
   );
+  const config = {
+    templateName,
+    packageName: templateName.toLowerCase(),
+    app: 'testapp',
+    rnVersion: '0.47.2',
+  };
 
   it('creates a TemplateManager.kt', async () => {
     const fileData = await readFile('TemplateManager.kt', readDirPath);
-    const parsedFile = parseFile(
-      fileData,
-      templateName,
-      templateName.toLowerCase(),
-      'testapp',
-    );
+    const parsedFile = parseFile(fileData, config);
     expect(parsedFile).toMatchSnapshot();
   });
 
   it('creates a TemplatePackage.kt', async () => {
     const fileData = await readFile('TemplatePackage.kt', readDirPath);
-    const parsedFile = parseFile(
-      fileData,
-      templateName,
-      templateName.toLowerCase(),
-      'testapp',
-    );
+    const parsedFile = parseFile(fileData, config);
     expect(parsedFile).toMatchSnapshot();
   });
 });
@@ -43,26 +39,22 @@ describe('Android/Kotlin: Native Modules', () => {
     'modules',
     'android-kotlin',
   );
+  const config = {
+    templateName,
+    packageName: templateName.toLowerCase(),
+    app: 'testapp',
+    rnVersion: '0.47.2',
+  };
 
   it('creates a TemplateModule.kt', async () => {
     const fileData = await readFile('TemplateModule.kt', readDirPath);
-    const parsedFile = parseFile(
-      fileData,
-      templateName,
-      templateName.toLowerCase(),
-      'testapp',
-    );
+    const parsedFile = parseFile(fileData, config);
     expect(parsedFile).toMatchSnapshot();
   });
 
   it('creates a TemplatePackage.kt', async () => {
     const fileData = await readFile('TemplatePackage.kt', readDirPath);
-    const parsedFile = parseFile(
-      fileData,
-      templateName,
-      templateName.toLowerCase(),
-      'testapp',
-    );
+    const parsedFile = parseFile(fileData, config);
     expect(parsedFile).toMatchSnapshot();
   });
 });
@@ -76,37 +68,28 @@ describe('Android/Kotlin: Combined', () => {
     'combined',
     'android-kotlin',
   );
+  const config = {
+    templateName,
+    packageName: templateName.toLowerCase(),
+    app: 'testapp',
+    rnVersion: '0.47.2',
+  };
 
   it('creates a TemplateManager.kt', async () => {
     const fileData = await readFile('TemplateManager.kt', readDirPath);
-    const parsedFile = parseFile(
-      fileData,
-      templateName,
-      templateName.toLowerCase(),
-      'testapp',
-    );
+    const parsedFile = parseFile(fileData, config);
     expect(parsedFile).toMatchSnapshot();
   });
 
   it('creates a TemplateModule.kt', async () => {
     const fileData = await readFile('TemplateModule.kt', readDirPath);
-    const parsedFile = parseFile(
-      fileData,
-      templateName,
-      templateName.toLowerCase(),
-      'testapp',
-    );
+    const parsedFile = parseFile(fileData, config);
     expect(parsedFile).toMatchSnapshot();
   });
 
   it('creates a TemplatePackage.kt', async () => {
     const fileData = await readFile('TemplatePackage.kt', readDirPath);
-    const parsedFile = parseFile(
-      fileData,
-      templateName,
-      templateName.toLowerCase(),
-      'testapp',
-    );
+    const parsedFile = parseFile(fileData, config);
     expect(parsedFile).toMatchSnapshot();
   });
 });

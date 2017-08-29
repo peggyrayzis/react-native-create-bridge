@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`iOS/Obj-C: Combined creates a Template.h 1`] = `
 "//  Created by react-native-create-bridge
 
@@ -19,7 +21,7 @@ exports[`iOS/Obj-C: Combined creates a Template.h 1`] = `
 exports[`iOS/Obj-C: Combined creates a TemplateManager.m 1`] = `
 "//  Created by react-native-create-bridge
 
-#import \"TestModule.h\"
+#import \\"TestModule.h\\"
 
 // import RCTBridge
 #if __has_include(<React/RCTBridge.h>)
@@ -51,7 +53,7 @@ RCT_EXPORT_MODULE();
 - (NSDictionary *)constantsToExport
 {
   return @{
-           @\"EXAMPLE\": @\"example\"
+           @\\"EXAMPLE\\": @\\"example\\"
          };
 }
 
@@ -65,7 +67,7 @@ RCT_EXPORT_MODULE();
 // https://facebook.github.io/react-native/docs/native-modules-ios.html
 RCT_EXPORT_METHOD(exampleMethod)
 {
-  [self emitMessageToRN:@\"EXAMPLE_EVENT\" :nil];
+  [self emitMessageToRN:@\\"EXAMPLE_EVENT\\" :nil];
 }
 
 #pragma mark - Private methods
@@ -111,7 +113,7 @@ exports[`iOS/Obj-C: Native Modules creates a Template.h 1`] = `
 exports[`iOS/Obj-C: Native Modules creates a Template.m 1`] = `
 "//  Created by react-native-create-bridge
 
-#import \"TestModule.h\"
+#import \\"TestModule.h\\"
 
 // import RCTBridge
 #if __has_include(<React/RCTBridge.h>)
@@ -143,7 +145,7 @@ RCT_EXPORT_MODULE();
 - (NSDictionary *)constantsToExport
 {
   return @{
-           @\"EXAMPLE\": @\"example\"
+           @\\"EXAMPLE\\": @\\"example\\"
          };
 }
 
@@ -151,14 +153,14 @@ RCT_EXPORT_MODULE();
 // https://facebook.github.io/react-native/docs/native-modules-ios.html
 RCT_EXPORT_METHOD(exampleMethod)
 {
-  [self emitMessageToRN:@\"EXAMPLE_EVENT\" :nil];
+  [self emitMessageToRN:@\\"EXAMPLE_EVENT\\" :nil];
 }
 
 // List all your events here
 // https://facebook.github.io/react-native/releases/next/docs/native-modules-ios.html#sending-events-to-javascript
 - (NSArray<NSString *> *)supportedEvents
 {
-  return @[@\"SampleEvent\"];
+  return @[@\\"SampleEvent\\"];
 }
 
 #pragma mark - Private methods
@@ -196,7 +198,7 @@ exports[`iOS/Obj-C: UI Components creates a Template.h 1`] = `
 exports[`iOS/Obj-C: UI Components creates a Template.m 1`] = `
 "//  Created by react-native-create-bridge
 #import <Foundation/Foundation.h>
-#import \"TestModule.h\"
+#import \\"TestModule.h\\"
 
 // import RCTEventDispatcher
 #if __has_include(<React/RCTEventDispatcher.h>)
@@ -250,8 +252,8 @@ exports[`iOS/Obj-C: UI Components creates a TemplateManager.m 1`] = `
 "//  Created by react-native-create-bridge
 
 #import <Foundation/Foundation.h>
-#import \"TestModule.h\"
-#import \"TestModuleManager.h\"
+#import \\"TestModule.h\\"
+#import \\"TestModuleManager.h\\"
 
 // import RCTBridge
 #if __has_include(<React/RCTBridge.h>)
@@ -283,7 +285,7 @@ RCT_EXPORT_VIEW_PROPERTY(exampleProp, NSString)
 - (NSDictionary *)constantsToExport
 {
   return @{
-           @\"EXAMPLE\": @\"example\"
+           @\\"EXAMPLE\\": @\\"example\\"
          };
 }
 

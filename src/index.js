@@ -8,6 +8,8 @@ import { success as successIcon, error as errorIcon } from "log-symbols";
 
 import readAndWriteFiles, { pkg, getFileNames } from "./file-operations";
 
+const rnVersion = pkg.dependencies["react-native"];
+
 const templateNameRegex = /\w+/;
 const promptConfig = [
   {
@@ -110,13 +112,12 @@ async function createJavaEnvironment(templateName, templateFolder) {
 
   const files = await getFileNames(readDirPath);
 
-  return readAndWriteFiles(
-    files,
-    paths,
+  return readAndWriteFiles(files, paths, {
     templateName,
-    templateName.toLowerCase(),
-    pkg.name.toLowerCase()
-  );
+    packageName: templateName.toLowerCase(),
+    app: pkg.name.toLowerCase(),
+    rnVersion
+  });
 }
 
 async function createKotlinEnvironment(templateName, templateFolder) {
@@ -152,13 +153,12 @@ async function createKotlinEnvironment(templateName, templateFolder) {
 
   const files = await getFileNames(readDirPath);
 
-  return readAndWriteFiles(
-    files,
-    paths,
+  return readAndWriteFiles(files, paths, {
     templateName,
-    templateName.toLowerCase(),
-    pkg.name.toLowerCase()
-  );
+    packageName: templateName.toLowerCase(),
+    app: pkg.name.toLowerCase(),
+    rnVersion
+  });
 }
 
 async function createSwiftEnvironment(templateName, templateFolder) {
@@ -177,7 +177,7 @@ async function createSwiftEnvironment(templateName, templateFolder) {
 
   const files = await getFileNames(readDirPath);
 
-  return readAndWriteFiles(files, paths, templateName);
+  return readAndWriteFiles(files, paths, { templateName });
 }
 
 async function createObjCEnvironment(templateName, templateFolder) {
@@ -196,7 +196,7 @@ async function createObjCEnvironment(templateName, templateFolder) {
 
   const files = await getFileNames(readDirPath);
 
-  return readAndWriteFiles(files, paths, templateName);
+  return readAndWriteFiles(files, paths, { templateName });
 }
 
 async function createJSEnvironment(templateName, templateFolder, jsPath) {
@@ -217,7 +217,7 @@ async function createJSEnvironment(templateName, templateFolder, jsPath) {
 
   const files = await getFileNames(readDirPath);
 
-  return readAndWriteFiles(files, paths, templateName);
+  return readAndWriteFiles(files, paths, { templateName });
 }
 
 init();
