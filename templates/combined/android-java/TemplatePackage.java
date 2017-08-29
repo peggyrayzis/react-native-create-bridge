@@ -22,11 +22,7 @@ public class {{template}}Package implements ReactPackage {
       );
     }
 
-    @Override
-    public List<Class<? extends JavaScriptModule>> createJSModules() {
-        return Collections.emptyList();
-    }
-
+    {{javaPackage}}
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         // Register your native component's view manager
         // https://facebook.github.io/react-native/docs/native-components-android.html#4-register-the-viewmanager

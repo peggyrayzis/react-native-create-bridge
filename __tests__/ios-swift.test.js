@@ -13,25 +13,25 @@ describe('iOS/Swift: UI Components', () => {
 
   it('creates a Template-Bridging-Header.h', async () => {
     const fileData = await readFile('Template-Bridging-Header.h', readDirPath);
-    const parsedFile = parseFile(fileData, templateName);
+    const parsedFile = parseFile(fileData, { templateName });
     expect(parsedFile).toMatchSnapshot();
   });
 
   it('creates a Template.m', async () => {
     const fileData = await readFile('Template.m', readDirPath);
-    const parsedFile = parseFile(fileData, templateName);
+    const parsedFile = parseFile(fileData, { templateName });
     expect(parsedFile).toMatchSnapshot();
   });
 
   it('creates a TemplateManager.swift', async () => {
     const fileData = await readFile('TemplateManager.swift', readDirPath);
-    const parsedFile = parseFile(fileData, templateName);
+    const parsedFile = parseFile(fileData, { templateName });
     expect(parsedFile).toMatchSnapshot();
   });
 
   it('creates a TemplateView.swift', async () => {
     const fileData = await readFile('TemplateView.swift', readDirPath);
-    const parsedFile = parseFile(fileData, templateName);
+    const parsedFile = parseFile(fileData, { templateName });
     expect(parsedFile).toMatchSnapshot();
   });
 });
@@ -48,19 +48,19 @@ describe('iOS/Swift: Native Modules', () => {
 
   it('creates a Template-Bridging-Header.h', async () => {
     const fileData = await readFile('Template-Bridging-Header.h', readDirPath);
-    const parsedFile = parseFile(fileData, templateName);
+    const parsedFile = parseFile(fileData, { templateName });
     expect(parsedFile).toMatchSnapshot();
   });
 
   it('creates a Template.m', async () => {
     const fileData = await readFile('Template.m', readDirPath);
-    const parsedFile = parseFile(fileData, templateName);
+    const parsedFile = parseFile(fileData, { templateName });
     expect(parsedFile).toMatchSnapshot();
   });
 
   it('creates a Template.swift', async () => {
     const fileData = await readFile('Template.swift', readDirPath);
-    const parsedFile = parseFile(fileData, templateName);
+    const parsedFile = parseFile(fileData, { templateName });
     expect(parsedFile).toMatchSnapshot();
   });
 });
@@ -77,19 +77,19 @@ describe('iOS/Swift: Combined', () => {
 
   it('creates a Template-Bridging-Header.h', async () => {
     const fileData = await readFile('Template-Bridging-Header.h', readDirPath);
-    const parsedFile = parseFile(fileData, templateName);
+    const parsedFile = parseFile(fileData, { templateName });
     expect(parsedFile).toMatchSnapshot();
   });
 
   it('creates a Template.m', async () => {
     const fileData = await readFile('Template.m', readDirPath);
-    const parsedFile = parseFile(fileData, templateName);
+    const parsedFile = parseFile(fileData, { templateName });
     expect(parsedFile).toMatchSnapshot();
   });
 
   it('creates a TemplateManager.swift', async () => {
     const fileData = await readFile('TemplateManager.swift', readDirPath);
-    const parsedFile = parseFile(fileData, templateName);
+    const parsedFile = parseFile(fileData, { templateName });
     expect(parsedFile).toMatchSnapshot();
   });
 });

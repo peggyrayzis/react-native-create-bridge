@@ -22,11 +22,7 @@ public class {{template}}Package implements ReactPackage {
       );
     }
 
-    @Override
-    public List<Class<? extends JavaScriptModule>> createJSModules() {
-        return Collections.emptyList();
-    }
-
+    {{javaPackage}}
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         return Collections.emptyList();
     }
