@@ -1,0 +1,58 @@
+{
+  "projectName": "react-native-create-bridge",
+  "projectOwner": "peggyrayzis",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "kkemple",
+      "name": "Kurtis Kemple",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/3629876?v=4",
+      "profile": "https://twitter.com/kurtiskemple",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "bduyng",
+      "name": "Duy Bao Nguyen",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/3772710?v=4",
+      "profile": "https://github.com/bduyng",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "grabbou",
+      "name": "Mike Grabowski",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/2464966?v=4",
+      "profile": "https://github.com/grabbou",
+      "contributions": [
+        "question"
+      ]
+    },
+    {
+      "login": "peggyrayzis",
+      "name": "Peggy Rayzis",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/18017067?v=4",
+      "profile": "https://twitter.com/peggyrayzis",
+      "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
+    },
+    {
+      "login": "Air-Miha",
+      "name": "Mihovil",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/24268882?v=4",
+      "profile": "https://github.com/Air-Miha",
+      "contributions": [
+        "blog"
+      ]
+    }
+  ]
+}
