@@ -40,6 +40,12 @@ const environmentMap = {
   "iOS/Objective-C": createObjCEnvironment
 };
 
+const defaultPathsMap = {
+  JS: ".",
+  iOS: "ios",
+  Android: "android"
+};
+
 async function init() {
   try {
     const { environment, bridgeType, templateName } = await inquirer.prompt(
@@ -61,7 +67,7 @@ async function init() {
         type: "input",
         name: `${fileType.toLowerCase()}Path`,
         message: `What directory should we deliver your ${fileType} files to?`,
-        default: fileType === "JS" ? "." : fileType.toLowerCase(),
+        default: defaultPathsMap[fileType],
         validate: input => isValid(input)
       };
     });
@@ -193,10 +199,8 @@ async function createSwiftEnvironment(
     "ios-swift"
   );
 
-  if (nativePath !== "ios") {
-    nativePath = path.join(process.cwd(), "ios", nativePath);
-    await mkdir(nativePath);
-  }
+  nativePath = path.join(process.cwd(), "ios", nativePath);
+  await mkdir(nativePath);
 
   const paths = {
     readDirPath,
@@ -217,10 +221,8 @@ async function createObjCEnvironment(templateName, templateFolder, nativePath) {
     "ios-objc"
   );
 
-  if (nativePath !== "ios") {
-    nativePath = path.join(process.cwd(), "ios", nativePath);
-    await mkdir(nativePath);
-  }
+  nativePath = path.join(process.cwd(), "ios", nativePath);
+  await mkdir(nativePath);
 
   const paths = {
     readDirPath,
