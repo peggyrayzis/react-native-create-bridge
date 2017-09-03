@@ -1,5 +1,6 @@
 import path from "path";
 import fs from "mz/fs";
+import compareVersions from "compare-versions";
 
 export const pkg = require(path.join(process.cwd(), "package.json"));
 
@@ -25,7 +26,7 @@ export function parseFile(
   let javaPackage;
 
   // TODO: figure out a better way to handle one off breaking changes
-  if (rnVersion < "0.47.2") {
+  if (rnVersion && compareVersions(rnVersion, "0.47.2") < 0) {
     kotlinPackage = `
     override fun createJSModules(): List<Class<out JavaScriptModule>> {
         return emptyList()
