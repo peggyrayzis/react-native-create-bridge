@@ -32,13 +32,6 @@ const promptConfig = [
     message: "What OS & languages would you like to support?",
     default: ["Android/Java", "iOS/Objective-C"],
     choices: ["Android/Java", "Android/Kotlin", "iOS/Swift", "iOS/Objective-C"]
-  },
-  {
-    type: "input",
-    name: "jsPath",
-    message: "What directory should we deliver your JS files to?",
-    default: ".",
-    validate: input => isValid(input)
   }
 ];
 
@@ -49,22 +42,50 @@ const environmentMap = {
   "iOS/Objective-C": createObjCEnvironment
 };
 
+const defaultPathsMap = {
+  JS: ".",
+  iOS: "ios",
+  Android: "android"
+};
+
 async function init() {
   try {
-    const {
-      environment,
-      bridgeType,
-      templateName,
-      jsPath
-    } = await inquirer.prompt(promptConfig);
+    const { environment, bridgeType, templateName } = await inquirer.prompt(
+      promptConfig
+    );
+
+    const fileTypes = ["JS"];
+    const includediOS = environment.find(
+      answer => answer.indexOf("iOS") !== -1
+    );
+    if (includediOS) fileTypes.unshift("iOS");
+    const includedAndroid = environment.find(
+      answer => answer.indexOf("Android") !== -1
+    );
+    if (includedAndroid) fileTypes.unshift("Android");
+
+    const extraPromptConfig = fileTypes.map(fileType => {
+      return {
+        type: "input",
+        name: `${fileType.toLowerCase()}Path`,
+        message: `What directory should we deliver your ${fileType} files to?`,
+        default: defaultPathsMap[fileType],
+        validate: input => isValid(input)
+      };
+    });
+
+    const { iosPath, androidPath, jsPath } = await inquirer.prompt(
+      extraPromptConfig
+    );
 
     const templateFolder = bridgeType.length > 1
       ? "combined"
       : bridgeType[0] === "Native Module" ? "modules" : "ui-components";
 
-    const promises = environment.map(env =>
-      environmentMap[env](templateName, templateFolder)
-    );
+    const promises = environment.map(env => {
+      const nativePath = env.indexOf("iOS") !== -1 ? iosPath : androidPath;
+      return environmentMap[env](templateName, templateFolder, nativePath);
+    });
 
     promises.push(createJSEnvironment(templateName, templateFolder, jsPath));
     await Promise.all(promises);
@@ -79,7 +100,7 @@ async function init() {
   }
 }
 
-async function createJavaEnvironment(templateName, templateFolder) {
+async function createJavaEnvironment(templateName, templateFolder, nativePath) {
   const appPath = path.join(
     process.cwd(),
     "android",
@@ -120,7 +141,11 @@ async function createJavaEnvironment(templateName, templateFolder) {
   });
 }
 
-async function createKotlinEnvironment(templateName, templateFolder) {
+async function createKotlinEnvironment(
+  templateName,
+  templateFolder,
+  nativePath
+) {
   const appPath = path.join(
     process.cwd(),
     "android",
@@ -161,7 +186,11 @@ async function createKotlinEnvironment(templateName, templateFolder) {
   });
 }
 
-async function createSwiftEnvironment(templateName, templateFolder) {
+async function createSwiftEnvironment(
+  templateName,
+  templateFolder,
+  nativePath
+) {
   const readDirPath = path.join(
     __dirname,
     "..",
@@ -170,9 +199,12 @@ async function createSwiftEnvironment(templateName, templateFolder) {
     "ios-swift"
   );
 
+  nativePath = path.join(process.cwd(), "ios", nativePath);
+  await mkdir(nativePath);
+
   const paths = {
     readDirPath,
-    writeDirPath: path.join(process.cwd(), "ios")
+    writeDirPath: nativePath
   };
 
   const files = await getFileNames(readDirPath);
@@ -180,7 +212,7 @@ async function createSwiftEnvironment(templateName, templateFolder) {
   return readAndWriteFiles(files, paths, { templateName });
 }
 
-async function createObjCEnvironment(templateName, templateFolder) {
+async function createObjCEnvironment(templateName, templateFolder, nativePath) {
   const readDirPath = path.join(
     __dirname,
     "..",
@@ -189,9 +221,12 @@ async function createObjCEnvironment(templateName, templateFolder) {
     "ios-objc"
   );
 
+  nativePath = path.join(process.cwd(), "ios", nativePath);
+  await mkdir(nativePath);
+
   const paths = {
     readDirPath,
-    writeDirPath: path.join(process.cwd(), "ios")
+    writeDirPath: nativePath
   };
 
   const files = await getFileNames(readDirPath);
