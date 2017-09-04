@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`Android/Kotlin: Combined creates a TemplateManager.kt 1`] = `
 "//  Created by react-native-create-bridge
 
@@ -24,14 +26,14 @@ class TestModuleManager : SimpleViewManager<View>() {
         return View(context)
     }
 
-    @ReactProp(name = \"exampleProp\")
+    @ReactProp(name = \\"exampleProp\\")
     fun setExampleProp(View view, String prop) {
         // Set properties from React onto your native component
         // https://facebook.github.io/react-native/docs/native-components-android.html#3-expose-view-property-setters-using-reactprop-or-reactpropgroup-annotation
     }
 
     companion object {
-        val REACT_CLASS = \"TestModule\"
+        val REACT_CLASS = \\"TestModule\\"
     }
 }
 "
@@ -53,7 +55,7 @@ import java.util.Map
 class TestModuleModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
     
     init {
-        // Here we\'re saving the context we passed into the constructor to a variable so we can emit events
+        // Here we're saving the context we passed into the constructor to a variable so we can emit events
         // https://facebook.github.io/react-native/docs/native-modules-android.html#the-toast-module
         reactContext = context
     }
@@ -68,7 +70,7 @@ class TestModuleModule(reactContext: ReactApplicationContext) : ReactContextBase
         // Export any constants to be used in your native module
         // https://facebook.github.io/react-native/docs/native-modules-android.html#the-toast-module
         val reactConstants = Map<String, Any>()
-        constants.put(\"EXAMPLE_CONSTANT\", \"example\")
+        constants.put(\\"EXAMPLE_CONSTANT\\", \\"example\\")
 
         return constants
     }
@@ -80,7 +82,7 @@ class TestModuleModule(reactContext: ReactApplicationContext) : ReactContextBase
     }
 
     companion object {
-        val REACT_CLASS = \"TestModule\"
+        val REACT_CLASS = \\"TestModule\\"
         private var reactContext: ReactApplicationContext = null
 
         private fun emitDeviceEvent(eventName: String, eventData: WritableMap?) {
@@ -116,13 +118,10 @@ class TestModulePackage : ReactPackage {
         )
     }
 
-    override fun createJSModules(): List<Class<out JavaScriptModule>> {
-        return emptyList()
-    }
-
+    
     override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
         // https://facebook.github.io/react-native/docs/native-components-android.html#4-register-the-viewmanager
-        // Register your native component\'s view manager
+        // Register your native component's view manager
         return Arrays.asList<ViewManager<*, *>>(
             TestModuleManager()
         )
@@ -148,7 +147,7 @@ import java.util.Map
 class TestModuleModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
     
     init {
-        // Here we\'re saving the context we passed into the constructor to a variable so we can emit events
+        // Here we're saving the context we passed into the constructor to a variable so we can emit events
         // https://facebook.github.io/react-native/docs/native-modules-android.html#the-toast-module
         reactContext = context
     }
@@ -163,7 +162,7 @@ class TestModuleModule(reactContext: ReactApplicationContext) : ReactContextBase
         // Export any constants to be used in your native module
         // https://facebook.github.io/react-native/docs/native-modules-android.html#the-toast-module
         val reactConstants = Map<String, Any>()
-        constants.put(\"EXAMPLE_CONSTANT\", \"example\")
+        constants.put(\\"EXAMPLE_CONSTANT\\", \\"example\\")
 
         return constants
     }
@@ -175,7 +174,7 @@ class TestModuleModule(reactContext: ReactApplicationContext) : ReactContextBase
     }
 
     companion object {
-        val REACT_CLASS = \"TestModule\"
+        val REACT_CLASS = \\"TestModule\\"
         private var reactContext: ReactApplicationContext = null
 
         private fun emitDeviceEvent(eventName: String, eventData: WritableMap?) {
@@ -211,10 +210,7 @@ class TestModulePackage : ReactPackage {
         )
     }
 
-    override fun createJSModules(): List<Class<out JavaScriptModule>> {
-        return emptyList()
-    }
-
+    
     override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
         return emptyList()
     }
@@ -249,14 +245,14 @@ class TestModuleManager : SimpleViewManager<View>() {
         return View(context)
     }
 
-    @ReactProp(name = \"exampleProp\")
+    @ReactProp(name = \\"exampleProp\\")
     fun setExampleProp(View view, String prop) {
         // Set properties from React onto your native component
         // https://facebook.github.io/react-native/docs/native-components-android.html#3-expose-view-property-setters-using-reactprop-or-reactpropgroup-annotation
     }
 
     companion object {
-        val REACT_CLASS = \"TestModule\"
+        val REACT_CLASS = \\"TestModule\\"
     }
 }
 "
@@ -281,13 +277,10 @@ class TestModulePackage : ReactPackage {
         return emptyList()
     }
 
-    override fun createJSModules(): List<Class<out JavaScriptModule>> {
-        return emptyList()
-    }
-
+    
     override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
         // https://facebook.github.io/react-native/docs/native-components-android.html#4-register-the-viewmanager
-        // Register your native component\'s view manager
+        // Register your native component's view manager
         return Arrays.asList<ViewManager<*, *>>(
             TestModuleManager()
         )

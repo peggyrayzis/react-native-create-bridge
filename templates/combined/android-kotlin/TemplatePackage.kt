@@ -20,10 +20,7 @@ class {{template}}Package : ReactPackage {
         )
     }
 
-    override fun createJSModules(): List<Class<out JavaScriptModule>> {
-        return emptyList()
-    }
-
+    {{kotlinPackage}}
     override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
         // https://facebook.github.io/react-native/docs/native-components-android.html#4-register-the-viewmanager
         // Register your native component's view manager

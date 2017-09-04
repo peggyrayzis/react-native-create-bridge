@@ -9,6 +9,8 @@ const { success: successIcon, error: errorIcon } = logSymbols;
 const fileOperations = require("./file-operations");
 const { pkg, getFileNames, readAndWriteFiles } = fileOperations;
 
+const rnVersion = pkg.dependencies["react-native"];
+
 const templateNameRegex = /\w+/;
 const promptConfig = [
   {
@@ -109,13 +111,12 @@ function createJavaEnvironment(templateName, templateFolder) {
     };
 
     getFileNames(readDirPath).then(files =>
-      readAndWriteFiles(
-        files,
-        paths,
+      readAndWriteFiles(files, paths, {
         templateName,
-        templateName.toLowerCase(),
-        pkg.name.toLowerCase()
-      )
+        packageName: templateName.toLowerCase(),
+        app: pkg.name.toLowerCase(),
+        rnVersion
+      })
     );
   });
 }
@@ -151,13 +152,12 @@ function createKotlinEnvironment(templateName, templateFolder) {
     };
 
     return getFileNames(readDirPath).then(files =>
-      readAndWriteFiles(
-        files,
-        paths,
+      readAndWriteFiles(files, paths, {
         templateName,
-        templateName.toLowerCase(),
-        pkg.name.toLowerCase()
-      )
+        packageName: templateName.toLowerCase(),
+        app: pkg.name.toLowerCase(),
+        rnVersion
+      })
     );
   });
 }
@@ -177,7 +177,7 @@ function createSwiftEnvironment(templateName, templateFolder) {
   };
 
   return getFileNames(readDirPath).then(files =>
-    readAndWriteFiles(files, paths, templateName)
+    readAndWriteFiles(files, paths, { templateName })
   );
 }
 
@@ -196,7 +196,7 @@ function createObjCEnvironment(templateName, templateFolder) {
   };
 
   return getFileNames(readDirPath).then(files =>
-    readAndWriteFiles(files, paths, templateName)
+    readAndWriteFiles(files, paths, { templateName })
   );
 }
 
@@ -216,7 +216,7 @@ function createJSEnvironment(templateName, templateFolder, jsPath) {
     };
 
     return getFileNames(readDirPath).then(files =>
-      readAndWriteFiles(files, paths, templateName)
+      readAndWriteFiles(files, paths, { templateName })
     );
   });
 }

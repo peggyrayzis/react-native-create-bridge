@@ -63,7 +63,6 @@ Depending on your environment, there may be a couple more steps that you have to
 - [ ] Modifies existing project files (`AppDelegate.h`, `MainApplication.java`) to complete the bridging process
 - [ ] Your feature request could be here! Open up an issue and give us feedback 😊
 
-
 ## Setting Up Dev Environment
 1. Fork this repo & clone it
 2. `cd` to where you cloned it
@@ -72,7 +71,6 @@ Depending on your environment, there may be a couple more steps that you have to
 5. You can now run `react-native create-bridge` locally in a React Native project to test your changes
 6. `npm run test` will run the Jest test suite
 
-
 ## Contributing
 `react-native-create-bridge` is a new project and we would love feedback from the community on how it should evolve. Please report any 🐞s and let us know how you're using `react-native-create-bridge`!
 
@@ -80,3 +78,13 @@ If you would like to contribute, please read the [contributor guidelines](https:
 
 This project adheres to the Contributor Covenant [code of conduct](http://contributor-covenant.org/version/1/3/0/).
 By participating, you are expected to uphold this code. Please report unacceptable behavior to peggyrayzis@gmail.com.
+
+## Contributors
+A big thank you goes out to these awesome people for their contributions ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+| [<img src="https://avatars3.githubusercontent.com/u/3629876?v=4" width="100px;"/><br /><sub>Kurtis Kemple</sub>](https://twitter.com/kurtiskemple)<br />[💻](https://github.com/peggyrayzis/react-native-create-bridge/commits?author=kkemple "Code") | [<img src="https://avatars0.githubusercontent.com/u/3772710?v=4" width="100px;"/><br /><sub>Duy Bao Nguyen</sub>](https://github.com/bduyng)<br />[💻](https://github.com/peggyrayzis/react-native-create-bridge/commits?author=bduyng "Code") | [<img src="https://avatars2.githubusercontent.com/u/2464966?v=4" width="100px;"/><br /><sub>Mike Grabowski</sub>](https://github.com/grabbou)<br />[💬](#question-grabbou "Answering Questions") | [<img src="https://avatars1.githubusercontent.com/u/18017067?v=4" width="100px;"/><br /><sub>Peggy Rayzis</sub>](https://twitter.com/peggyrayzis)<br />[💻](https://github.com/peggyrayzis/react-native-create-bridge/commits?author=peggyrayzis "Code") [📖](https://github.com/peggyrayzis/react-native-create-bridge/commits?author=peggyrayzis "Documentation") [👀](#review-peggyrayzis "Reviewed Pull Requests") | [<img src="https://avatars1.githubusercontent.com/u/24268882?v=4" width="100px;"/><br /><sub>Mihovil</sub>](https://github.com/Air-Miha)<br />[📝](#blog-Air-Miha "Blogposts") | [<img src="https://avatars0.githubusercontent.com/u/2574011?v=4" width="100px;"/><br /><sub>André Neves</sub>](http://andrenev.es)<br />[👀](#review-andrerfneves "Reviewed Pull Requests") |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!

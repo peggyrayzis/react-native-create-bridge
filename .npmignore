@@ -4,3 +4,4 @@ node_modules/
 __tests__/
 .travis.yml
 .github/
+.all-contributorsrc

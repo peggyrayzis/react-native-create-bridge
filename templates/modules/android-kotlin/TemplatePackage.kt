@@ -20,10 +20,7 @@ class {{template}}Package : ReactPackage {
         )
     }
 
-    override fun createJSModules(): List<Class<out JavaScriptModule>> {
-        return emptyList()
-    }
-
+    {{kotlinPackage}}
     override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
         return emptyList()
     }

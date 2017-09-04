@@ -8,13 +8,13 @@ describe('JS: Combined', () => {
 
   it('creates a TemplateNativeModule.js', async () => {
     const fileData = await readFile('TemplateNativeModule.js', readDirPath);
-    const parsedFile = parseFile(fileData, templateName);
+    const parsedFile = parseFile(fileData, { templateName });
     expect(parsedFile).toMatchSnapshot();
   });
 
   it('creates a TemplateNativeView.js', async () => {
     const fileData = await readFile('TemplateNativeView.js', readDirPath);
-    const parsedFile = parseFile(fileData, templateName);
+    const parsedFile = parseFile(fileData, { templateName });
     expect(parsedFile).toMatchSnapshot();
   });
 });
@@ -25,7 +25,7 @@ describe('JS: Native Modules', () => {
 
   it('creates a TemplateNativeModule.js', async () => {
     const fileData = await readFile('TemplateNativeModule.js', readDirPath);
-    const parsedFile = parseFile(fileData, templateName);
+    const parsedFile = parseFile(fileData, { templateName });
     expect(parsedFile).toMatchSnapshot();
   });
 });
@@ -42,7 +42,7 @@ describe('JS: UI Components', () => {
 
   it('creates a TemplateNativeView.js', async () => {
     const fileData = await readFile('TemplateNativeView.js', readDirPath);
-    const parsedFile = parseFile(fileData, templateName);
+    const parsedFile = parseFile(fileData, { templateName });
     expect(parsedFile).toMatchSnapshot();
   });
 });

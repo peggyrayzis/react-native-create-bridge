@@ -14,25 +14,25 @@ describe('iOS/Obj-C: UI Components', () => {
 
   it('creates a Template.h', async () => {
     const fileData = await readFile('Template.h', readDirPath);
-    const parsedFile = parseFile(fileData, templateName);
+    const parsedFile = parseFile(fileData, { templateName });
     expect(parsedFile).toMatchSnapshot();
   });
 
   it('creates a Template.m', async () => {
     const fileData = await readFile('Template.m', readDirPath);
-    const parsedFile = parseFile(fileData, templateName);
+    const parsedFile = parseFile(fileData, { templateName });
     expect(parsedFile).toMatchSnapshot();
   });
 
   it('creates a TemplateManager.h', async () => {
     const fileData = await readFile('TemplateManager.h', readDirPath);
-    const parsedFile = parseFile(fileData, templateName);
+    const parsedFile = parseFile(fileData, { templateName });
     expect(parsedFile).toMatchSnapshot();
   });
 
   it('creates a TemplateManager.m', async () => {
     const fileData = await readFile('TemplateManager.m', readDirPath);
-    const parsedFile = parseFile(fileData, templateName);
+    const parsedFile = parseFile(fileData, { templateName });
     expect(parsedFile).toMatchSnapshot();
   });
 });
@@ -49,13 +49,13 @@ describe('iOS/Obj-C: Native Modules', () => {
 
   it('creates a Template.h', async () => {
     const fileData = await readFile('Template.h', readDirPath);
-    const parsedFile = parseFile(fileData, templateName);
+    const parsedFile = parseFile(fileData, { templateName });
     expect(parsedFile).toMatchSnapshot();
   });
 
   it('creates a Template.m', async () => {
     const fileData = await readFile('Template.m', readDirPath);
-    const parsedFile = parseFile(fileData, templateName);
+    const parsedFile = parseFile(fileData, { templateName });
     expect(parsedFile).toMatchSnapshot();
   });
 });
@@ -72,13 +72,13 @@ describe('iOS/Obj-C: Combined', () => {
 
   it('creates a Template.h', async () => {
     const fileData = await readFile('Template.h', readDirPath);
-    const parsedFile = parseFile(fileData, templateName);
+    const parsedFile = parseFile(fileData, { templateName });
     expect(parsedFile).toMatchSnapshot();
   });
 
   it('creates a TemplateManager.m', async () => {
     const fileData = await readFile('TemplateManager.m', readDirPath);
-    const parsedFile = parseFile(fileData, templateName);
+    const parsedFile = parseFile(fileData, { templateName });
     expect(parsedFile).toMatchSnapshot();
   });
 });
