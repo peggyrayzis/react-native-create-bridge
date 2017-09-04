@@ -50,21 +50,14 @@ function parseFile(fileData, { templateName, packageName, app, rnVersion }) {
 function readAndWriteFiles(files, paths, config) {
   const { readDirPath, writeDirPath } = paths;
   return Promise.all(
-    files
-      .map(file => {
-        readFile(file, readDirPath).then(fileData => {
-          const parsedFile = parseFile(
-            fileData,
-            templateName,
-            packageName,
-            app
-          );
-          const fileName = file.replace("Template", templateName);
-          return fs.writeFile(path.join(writeDirPath, fileName), parsedFile);
-        });
-      })
-      .catch(e => console.error("[readAndWriteFiles] ", e))
-  );
+    files.map(file => {
+      readFile(file, readDirPath).then(fileData => {
+        const parsedFile = parseFile(fileData, config);
+        const fileName = file.replace("Template", config.templateName);
+        return fs.writeFile(path.join(writeDirPath, fileName), parsedFile);
+      });
+    })
+  ).catch(e => console.error("[readAndWriteFiles] ", e));
 }
 
 module.exports = {
