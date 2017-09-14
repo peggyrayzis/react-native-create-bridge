@@ -56,10 +56,9 @@ function init() {
     .then(result => {
       const { environment, bridgeType, templateName, jsPath } = result;
 
-      const templateFolder =
-        bridgeType.length > 1
-          ? "combined"
-          : bridgeType[0] === "Native Module" ? "modules" : "ui-components";
+      const templateFolder = bridgeType.length > 1
+        ? "combined"
+        : bridgeType[0] === "Native Module" ? "modules" : "ui-components";
 
       const promises = environment.map(env =>
         environmentMap[env](templateName, templateFolder)
@@ -222,8 +221,7 @@ function createJSEnvironment(templateName, templateFolder, jsPath) {
 }
 
 module.exports = {
-  name: "create-bridge",
-  description:
-    "A React Native plugin that bridges React Native modules & UI components with ease",
+  name: "new-module",
+  description: "bridges React Native modules & UI components with ease",
   func: init
 };
