@@ -16,7 +16,7 @@ If you would like to contribute through writing code, here's a guide on how to m
 3. Clone the repository to your local machine using `git clone https://github.com/YOUR_USERNAME_HERE/react-native-create-bridge.git`.
 4. Create a new branch for your fix using `git checkout -b branch-name-here`.
 5. Make the appropriate changes for the issue you are trying to address or the feature that you want to add. If you are adding a feature or changing functionality, please write tests! 👍 Tests will help your PR get merged faster.
-6. Test your change locally by running `npm run package:dev`. This command will build the project and create a symlink. In a test project, run `npm link react-native-create-bridge` which will link to your local copy. Then, you can run `react-native new-module` to test your change.
+6. Test your change locally by running `npm run package:dev`. This command will build the project and create a symlink. In a test project, run `npm install --save react-native-create-bridge && npm link react-native-create-bridge` which will link to your local copy. Then, you can run `react-native new-module` to test your change.
 7. Confirm that tests still pass by running `npm run test`. If the tests are failing, please ask for help!
 8. Add and commit the changed files using `git add` and `git commit`. We use [Conventional Changelog Standard](https://github.com/bcoe/conventional-changelog-standard/blob/master/convention.md) for our commit messages. More info on that below.
 9. Push the changes to the remote repository using git push origin branch-name-here.

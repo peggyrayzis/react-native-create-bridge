@@ -222,6 +222,6 @@ function createJSEnvironment(templateName, templateFolder, jsPath) {
 
 module.exports = {
   name: "new-module",
-  description: "bridges React Native modules & UI components with ease",
+  description: "bridges React Native modules & UI components",
   func: init
 };
