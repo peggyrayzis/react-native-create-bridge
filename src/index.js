@@ -4,11 +4,12 @@ import inquirer from "inquirer";
 import path from "path";
 import isValid from "is-valid-path";
 import mkdir from "mkdirp-promise";
+import semver from "semver";
 import { success as successIcon, error as errorIcon } from "log-symbols";
 
 import readAndWriteFiles, { pkg, getFileNames } from "./file-operations";
 
-const rnVersion = pkg.dependencies["react-native"];
+const rnVersion = semver.clean(pkg.dependencies["react-native"]);
 
 const templateNameRegex = /\w+/;
 const promptConfig = [
@@ -58,9 +59,10 @@ async function init() {
       jsPath
     } = await inquirer.prompt(promptConfig);
 
-    const templateFolder = bridgeType.length > 1
-      ? "combined"
-      : bridgeType[0] === "Native Module" ? "modules" : "ui-components";
+    const templateFolder =
+      bridgeType.length > 1
+        ? "combined"
+        : bridgeType[0] === "Native Module" ? "modules" : "ui-components";
 
     const promises = environment.map(env =>
       environmentMap[env](templateName, templateFolder)
