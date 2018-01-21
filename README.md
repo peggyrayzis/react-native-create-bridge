@@ -48,7 +48,7 @@ Depending on your environment, there may be a couple more steps that you have to
   }
   ```
   - Import your package at the top: `import com.yourapp.yourmodule.YourModulePackage`
-  
+
 #### iOS/Obj-C
   - Currently, you will need to add the files manually to your project in Xcode. Right click on the folder with your app name and select `Add Files To YourApp`. Select the files associated with your module and click `Add`
 
@@ -84,6 +84,7 @@ A big thank you goes out to these awesome people for their contributions ([emoji
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 | [<img src="https://avatars3.githubusercontent.com/u/3629876?v=4" width="100px;"/><br /><sub>Kurtis Kemple</sub>](https://twitter.com/kurtiskemple)<br />[💻](https://github.com/peggyrayzis/react-native-create-bridge/commits?author=kkemple "Code") | [<img src="https://avatars0.githubusercontent.com/u/3772710?v=4" width="100px;"/><br /><sub>Duy Bao Nguyen</sub>](https://github.com/bduyng)<br />[💻](https://github.com/peggyrayzis/react-native-create-bridge/commits?author=bduyng "Code") | [<img src="https://avatars2.githubusercontent.com/u/2464966?v=4" width="100px;"/><br /><sub>Mike Grabowski</sub>](https://github.com/grabbou)<br />[💬](#question-grabbou "Answering Questions") | [<img src="https://avatars1.githubusercontent.com/u/18017067?v=4" width="100px;"/><br /><sub>Peggy Rayzis</sub>](https://twitter.com/peggyrayzis)<br />[💻](https://github.com/peggyrayzis/react-native-create-bridge/commits?author=peggyrayzis "Code") [📖](https://github.com/peggyrayzis/react-native-create-bridge/commits?author=peggyrayzis "Documentation") [👀](#review-peggyrayzis "Reviewed Pull Requests") | [<img src="https://avatars1.githubusercontent.com/u/24268882?v=4" width="100px;"/><br /><sub>Mihovil</sub>](https://github.com/Air-Miha)<br />[📝](#blog-Air-Miha "Blogposts") | [<img src="https://avatars0.githubusercontent.com/u/2574011?v=4" width="100px;"/><br /><sub>André Neves</sub>](http://andrenev.es)<br />[👀](#review-andrerfneves "Reviewed Pull Requests") |
+[<img src="https://avatars0.githubusercontent.com/u/4745679?s=460&v=4" width="100px;"/><br /><sub>Jarret Moses</sub>](https://github.com/jarretmoses)<br />[💻] [💻](https://github.com/peggyrayzis/react-native-create-bridge/commits?author=jarretmoses "Code") [📖](https://github.com/peggyrayzis/react-native-create-bridge/commits?author=jarretmoses "Documentation") |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
