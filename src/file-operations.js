@@ -1,6 +1,7 @@
 import path from "path";
 import fs from "mz/fs";
 import compareVersions from "compare-versions";
+import semver from "semver";
 
 export const pkg = require(path.join(process.cwd(), "package.json"));
 
@@ -24,7 +25,9 @@ export function parseFile(
 ) {
   let kotlinPackage;
   let javaPackage;
-
+  if (rnVersion) {
+    console.log("HERE:::", templateName, rnVersion, semver.valid(rnVersion));
+  }
   // TODO: figure out a better way to handle one off breaking changes
   if (rnVersion && compareVersions(rnVersion, "0.47.2") < 0) {
     kotlinPackage = `
@@ -39,7 +42,7 @@ export function parseFile(
     public List<Class<? extends JavaScriptModule>> createJSModules() {
         return Collections.emptyList();
     }
-    
+
     `;
   } else {
     kotlinPackage = "";
