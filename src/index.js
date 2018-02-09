@@ -1,12 +1,13 @@
-#! /usr/bin/env node
+const inquirer = require("inquirer");
+const path = require("path");
+const isValid = require("is-valid-path");
+const mkdir = require("mkdirp-promise");
+const logSymbols = require("log-symbols");
 
-import inquirer from "inquirer";
-import path from "path";
-import isValid from "is-valid-path";
-import mkdir from "mkdirp-promise";
-import { success as successIcon, error as errorIcon } from "log-symbols";
+const { success: successIcon, error: errorIcon } = logSymbols;
 
-import readAndWriteFiles, { pkg, getFileNames } from "./file-operations";
+const fileOperations = require("./file-operations");
+const { pkg, getFileNames, readAndWriteFiles } = fileOperations;
 
 const rnVersion = pkg.dependencies["react-native"];
 
@@ -49,37 +50,37 @@ const environmentMap = {
   "iOS/Objective-C": createObjCEnvironment
 };
 
-async function init() {
-  try {
-    const {
-      environment,
-      bridgeType,
-      templateName,
-      jsPath
-    } = await inquirer.prompt(promptConfig);
+function init() {
+  inquirer
+    .prompt(promptConfig)
+    .then(result => {
+      const { environment, bridgeType, templateName, jsPath } = result;
 
-    const templateFolder = bridgeType.length > 1
-      ? "combined"
-      : bridgeType[0] === "Native Module" ? "modules" : "ui-components";
+      const templateFolder =
+        bridgeType.length > 1
+          ? "combined"
+          : bridgeType[0] === "Native Module" ? "modules" : "ui-components";
 
-    const promises = environment.map(env =>
-      environmentMap[env](templateName, templateFolder)
-    );
+      const promises = environment.map(env =>
+        environmentMap[env](templateName, templateFolder)
+      );
 
-    promises.push(createJSEnvironment(templateName, templateFolder, jsPath));
-    await Promise.all(promises);
+      promises.push(createJSEnvironment(templateName, templateFolder, jsPath));
 
-    console.log(
-      `${successIcon} Your bridge module was successfully created! 🎉`
-    );
-  } catch (e) {
-    console.log(
-      `${errorIcon} Oh no! 💩  Something went wrong with creating your bridge module.\nPlease report any errors here: https://github.com/peggyrayzis/react-native-create-bridge/issues\n\nError: ${e}`
-    );
-  }
+      Promise.all(promises).then(() => {
+        console.log(
+          `${successIcon} Your bridge module was successfully created! 🎉`
+        );
+      });
+    })
+    .catch(e => {
+      console.log(
+        `${errorIcon} Oh no! 💩  Something went wrong with creating your bridge module.\nPlease report any errors here: https://github.com/peggyrayzis/react-native-create-bridge/issues\n\nError: ${e}`
+      );
+    });
 }
 
-async function createJavaEnvironment(templateName, templateFolder) {
+function createJavaEnvironment(templateName, templateFolder) {
   const appPath = path.join(
     process.cwd(),
     "android",
@@ -99,28 +100,28 @@ async function createJavaEnvironment(templateName, templateFolder) {
     "android-java"
   );
 
-  const writeDirPath = await mkdir(
+  return mkdir(
     path.join(appPath, templateName.toLowerCase())
-  );
+  ).then(writeDirPath => {
+    const paths = {
+      readDirPath,
+      writeDirPath: writeDirPath
+        ? writeDirPath
+        : path.join(appPath, templateName.toLowerCase())
+    };
 
-  const paths = {
-    readDirPath,
-    writeDirPath: writeDirPath
-      ? writeDirPath
-      : path.join(appPath, templateName.toLowerCase())
-  };
-
-  const files = await getFileNames(readDirPath);
-
-  return readAndWriteFiles(files, paths, {
-    templateName,
-    packageName: templateName.toLowerCase(),
-    app: pkg.name.toLowerCase(),
-    rnVersion
+    getFileNames(readDirPath).then(files =>
+      readAndWriteFiles(files, paths, {
+        templateName,
+        packageName: templateName.toLowerCase(),
+        app: pkg.name.toLowerCase(),
+        rnVersion
+      })
+    );
   });
 }
 
-async function createKotlinEnvironment(templateName, templateFolder) {
+function createKotlinEnvironment(templateName, templateFolder) {
   const appPath = path.join(
     process.cwd(),
     "android",
@@ -140,28 +141,28 @@ async function createKotlinEnvironment(templateName, templateFolder) {
     "android-kotlin"
   );
 
-  const writeDirPath = await mkdir(
+  return mkdir(
     path.join(appPath, templateName.toLowerCase())
-  );
+  ).then(writeDirPath => {
+    const paths = {
+      readDirPath,
+      writeDirPath: writeDirPath
+        ? writeDirPath
+        : path.join(appPath, templateName.toLowerCase())
+    };
 
-  const paths = {
-    readDirPath,
-    writeDirPath: writeDirPath
-      ? writeDirPath
-      : path.join(appPath, templateName.toLowerCase())
-  };
-
-  const files = await getFileNames(readDirPath);
-
-  return readAndWriteFiles(files, paths, {
-    templateName,
-    packageName: templateName.toLowerCase(),
-    app: pkg.name.toLowerCase(),
-    rnVersion
+    return getFileNames(readDirPath).then(files =>
+      readAndWriteFiles(files, paths, {
+        templateName,
+        packageName: templateName.toLowerCase(),
+        app: pkg.name.toLowerCase(),
+        rnVersion
+      })
+    );
   });
 }
 
-async function createSwiftEnvironment(templateName, templateFolder) {
+function createSwiftEnvironment(templateName, templateFolder) {
   const readDirPath = path.join(
     __dirname,
     "..",
@@ -175,12 +176,12 @@ async function createSwiftEnvironment(templateName, templateFolder) {
     writeDirPath: path.join(process.cwd(), "ios")
   };
 
-  const files = await getFileNames(readDirPath);
-
-  return readAndWriteFiles(files, paths, { templateName });
+  return getFileNames(readDirPath).then(files =>
+    readAndWriteFiles(files, paths, { templateName })
+  );
 }
 
-async function createObjCEnvironment(templateName, templateFolder) {
+function createObjCEnvironment(templateName, templateFolder) {
   const readDirPath = path.join(
     __dirname,
     "..",
@@ -194,12 +195,12 @@ async function createObjCEnvironment(templateName, templateFolder) {
     writeDirPath: path.join(process.cwd(), "ios")
   };
 
-  const files = await getFileNames(readDirPath);
-
-  return readAndWriteFiles(files, paths, { templateName });
+  return getFileNames(readDirPath).then(files =>
+    readAndWriteFiles(files, paths, { templateName })
+  );
 }
 
-async function createJSEnvironment(templateName, templateFolder, jsPath) {
+function createJSEnvironment(templateName, templateFolder, jsPath) {
   const readDirPath = path.join(
     __dirname,
     "..",
@@ -208,16 +209,20 @@ async function createJSEnvironment(templateName, templateFolder, jsPath) {
     "js"
   );
 
-  await mkdir(jsPath);
+  return mkdir(jsPath).then(() => {
+    const paths = {
+      readDirPath,
+      writeDirPath: jsPath
+    };
 
-  const paths = {
-    readDirPath,
-    writeDirPath: jsPath
-  };
-
-  const files = await getFileNames(readDirPath);
-
-  return readAndWriteFiles(files, paths, { templateName });
+    return getFileNames(readDirPath).then(files =>
+      readAndWriteFiles(files, paths, { templateName })
+    );
+  });
 }
 
-init();
+module.exports = {
+  name: "new-module",
+  description: "bridges React Native modules & UI components",
+  func: init
+};

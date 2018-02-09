@@ -1,6 +1,6 @@
 {
   "name": "react-native-create-bridge",
-  "version": "1.2.2",
+  "version": "2.0.1",
   "description": "A CLI generator that creates React Native bridges with ease!",
   "main": "index.js",
   "scripts": {
@@ -17,9 +17,6 @@
       "prettier --write",
       "git add"
     ]
-  },
-  "bin": {
-    "create-bridge": "build/index.js"
   },
   "repository": {
     "type": "git",
@@ -68,8 +65,9 @@
         }
       ]
     ],
-    "plugins": [
-      "transform-runtime"
-    ]
+    "plugins": ["transform-runtime"]
+  },
+  "rnpm": {
+    "plugin": "./build/index.js"
   }
 }
