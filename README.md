@@ -2,8 +2,8 @@
 Bridging native modules & UI components made easy! If you're a JavaScript developer writing your first lines of native code or a more experienced developer looking to eliminate boilerplate from your React Native workflow, this tool is for you.
 
 ## Getting Started
-1. `npm install -g react-native-create-bridge` or `yarn global add react-native-create-bridge`
-2. From the root of your React Native project, run `create-bridge`
+1. `npm install --save react-native-create-bridge` or `yarn add react-native-create-bridge`
+2. From the root of your React Native project, run `react-native new-module`
 3. The prompts will ask you for:
   - Your bridge module name
   - Whether you want to create a native module or UI component (or both!)
@@ -68,7 +68,7 @@ Depending on your environment, there may be a couple more steps that you have to
 2. `cd` to where you cloned it
 3. `npm install` or `yarn`
 4. After you make changes, link your local package by running `npm run package:dev`
-5. You can now run `create-bridge` locally in a React Native project to test your changes
+5. You can now run `react-native new-module` locally in a React Native project to test your changes
 6. `npm run test` will run the Jest test suite
 
 ## Contributing
@@ -85,6 +85,7 @@ A big thank you goes out to these awesome people for their contributions ([emoji
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 | [<img src="https://avatars3.githubusercontent.com/u/3629876?v=4" width="100px;"/><br /><sub>Kurtis Kemple</sub>](https://twitter.com/kurtiskemple)<br />[💻](https://github.com/peggyrayzis/react-native-create-bridge/commits?author=kkemple "Code") | [<img src="https://avatars0.githubusercontent.com/u/3772710?v=4" width="100px;"/><br /><sub>Duy Bao Nguyen</sub>](https://github.com/bduyng)<br />[💻](https://github.com/peggyrayzis/react-native-create-bridge/commits?author=bduyng "Code") | [<img src="https://avatars2.githubusercontent.com/u/2464966?v=4" width="100px;"/><br /><sub>Mike Grabowski</sub>](https://github.com/grabbou)<br />[💬](#question-grabbou "Answering Questions") | [<img src="https://avatars1.githubusercontent.com/u/18017067?v=4" width="100px;"/><br /><sub>Peggy Rayzis</sub>](https://twitter.com/peggyrayzis)<br />[💻](https://github.com/peggyrayzis/react-native-create-bridge/commits?author=peggyrayzis "Code") [📖](https://github.com/peggyrayzis/react-native-create-bridge/commits?author=peggyrayzis "Documentation") [👀](#review-peggyrayzis "Reviewed Pull Requests") | [<img src="https://avatars1.githubusercontent.com/u/24268882?v=4" width="100px;"/><br /><sub>Mihovil</sub>](https://github.com/Air-Miha)<br />[📝](#blog-Air-Miha "Blogposts") | [<img src="https://avatars0.githubusercontent.com/u/2574011?v=4" width="100px;"/><br /><sub>André Neves</sub>](http://andrenev.es)<br />[👀](#review-andrerfneves "Reviewed Pull Requests") |
 | :---: | :---: | :---: | :---: | :---: | :---: |
+| [<img src="https://avatars0.githubusercontent.com/u/4745679?s=460&v=4" width="100px;"/><br /><sub>Jarret Moses</sub>](https://github.com/jarretmoses)<br />[💻](https://github.com/peggyrayzis/react-native-create-bridge/commits?author=jarretmoses "Code") [📖](https://github.com/peggyrayzis/react-native-create-bridge/commits?author=jarretmoses "Documentation") |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!

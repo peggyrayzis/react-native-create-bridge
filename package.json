@@ -1,6 +1,6 @@
 {
   "name": "react-native-create-bridge",
-  "version": "1.2.2",
+  "version": "2.0.1",
   "description": "A CLI generator that creates React Native bridges with ease!",
   "main": "index.js",
   "scripts": {
@@ -11,17 +11,13 @@
     "start": "node build/index.js",
     "precommit": "lint-staged",
     "prepublishOnly": "npm run build",
-    "package:dev":
-      "npm unlink react-native-create-bridge && rm -rf node_modules && yarn && npm run build && npm link"
+    "package:dev": "npm unlink react-native-create-bridge && rm -rf node_modules && yarn && npm run build && npm link"
   },
   "lint-staged": {
     "src/*.js": [
       "prettier --write",
       "git add"
     ]
-  },
-  "bin": {
-    "create-bridge": "build/index.js"
   },
   "repository": {
     "type": "git",
@@ -44,8 +40,7 @@
     "is-valid-path": "^0.1.1",
     "log-symbols": "^1.0.2",
     "mkdirp-promise": "^5.0.0",
-    "mz": "^2.6.0",
-    "semver": "^5.4.1"
+    "mz": "^2.6.0"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
@@ -73,5 +68,8 @@
     "plugins": [
       "transform-runtime"
     ]
+  },
+  "rnpm": {
+    "plugin": "./build/index.js"
   }
 }

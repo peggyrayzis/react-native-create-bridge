@@ -62,6 +62,16 @@
       "contributions": [
         "review"
       ]
+    },
+    {
+      "login": "jarretmoses",
+      "name": "Jarret Moses",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/4745679?s=460&v=4",
+      "profile": "https://github.com/jarretmoses",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ]
 }
