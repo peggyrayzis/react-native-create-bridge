@@ -10,24 +10,29 @@
     "build:watch": "babel -w src --out-dir build",
     "start": "node build/index.js",
     "precommit": "lint-staged",
-    "package:dev":
-      "npm unlink react-native-create-bridge && rm -rf node_modules && yarn && npm run build && npm link"
+    "prepublishOnly": "npm run build",
+    "package:dev": "npm unlink react-native-create-bridge && rm -rf node_modules && yarn && npm run build && npm link"
   },
   "lint-staged": {
-    "src/*.js": ["prettier --write", "git add"]
+    "src/*.js": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/peggyrayzis/react-native-create-bridge.git"
   },
-  "keywords": ["react", "native"],
+  "keywords": [
+    "react",
+    "native"
+  ],
   "author": "Peggy Rayzis & Kurt Kemple",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/peggyrayzis/react-native-create-bridge/issues"
   },
-  "homepage":
-    "https://github.com/peggyrayzis/react-native-create-bridge#readme",
+  "homepage": "https://github.com/peggyrayzis/react-native-create-bridge#readme",
   "dependencies": {
     "babel-runtime": "^6.20.0",
     "compare-versions": "^3.0.1",
@@ -60,7 +65,9 @@
         }
       ]
     ],
-    "plugins": ["transform-runtime"]
+    "plugins": [
+      "transform-runtime"
+    ]
   },
   "rnpm": {
     "plugin": "./build/index.js"
