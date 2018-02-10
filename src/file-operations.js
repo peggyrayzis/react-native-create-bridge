@@ -1,27 +1,20 @@
-import path from "path";
-import fs from "mz/fs";
-import compareVersions from "compare-versions";
+const path = require("path");
+const fs = require("mz/fs");
+const compareVersions = require("compare-versions");
 
-export const pkg = require(path.join(process.cwd(), "package.json"));
+const pkg = require(path.join(process.cwd(), "package.json"));
 
-export async function getFileNames(dirPath) {
-  const fileNames = await fs
-    .readdir(dirPath)
-    .catch(e => console.error("[getFileNames] ", e));
-  return fileNames;
+function getFileNames(dirPath) {
+  return fs.readdir(dirPath).catch(e => console.error("[getFileNames] ", e));
 }
 
-export async function readFile(file, readDirPath) {
-  const fileData = await fs
+function readFile(file, readDirPath) {
+  return fs
     .readFile(path.join(readDirPath, file), "utf-8")
     .catch(e => console.error("[readFile] ", e));
-  return fileData;
 }
 
-export function parseFile(
-  fileData,
-  { templateName, packageName, app, rnVersion }
-) {
+function parseFile(fileData, { templateName, packageName, app, rnVersion }) {
   let kotlinPackage;
   let javaPackage;
 
@@ -39,7 +32,7 @@ export function parseFile(
     public List<Class<? extends JavaScriptModule>> createJSModules() {
         return Collections.emptyList();
     }
-    
+
     `;
   } else {
     kotlinPackage = "";
@@ -54,14 +47,23 @@ export function parseFile(
     .replace(/{{javaPackage}}/g, javaPackage);
 }
 
-export default function readAndWriteFiles(files, paths, config) {
+function readAndWriteFiles(files, paths, config) {
   const { readDirPath, writeDirPath } = paths;
   return Promise.all(
-    files.map(async file => {
-      const fileData = await readFile(file, readDirPath);
-      const parsedFile = parseFile(fileData, config);
-      const fileName = file.replace("Template", config.templateName);
-      return fs.writeFile(path.join(writeDirPath, fileName), parsedFile);
+    files.map(file => {
+      readFile(file, readDirPath).then(fileData => {
+        const parsedFile = parseFile(fileData, config);
+        const fileName = file.replace("Template", config.templateName);
+        return fs.writeFile(path.join(writeDirPath, fileName), parsedFile);
+      });
     })
   ).catch(e => console.error("[readAndWriteFiles] ", e));
 }
+
+module.exports = {
+  pkg,
+  getFileNames,
+  readFile,
+  parseFile,
+  readAndWriteFiles
+};
