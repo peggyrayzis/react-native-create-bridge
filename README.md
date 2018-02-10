@@ -48,7 +48,7 @@ Depending on your environment, there may be a couple more steps that you have to
   }
   ```
   - Import your package at the top: `import com.yourapp.yourmodule.YourModulePackage`
-  
+
 #### iOS/Obj-C
   - Currently, you will need to add the files manually to your project in Xcode. Right click on the folder with your app name and select `Add Files To YourApp`. Select the files associated with your module and click `Add`
 
