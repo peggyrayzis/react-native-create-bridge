@@ -54,6 +54,26 @@ export default {
 "
 `;
 
+exports[`JS: Semver correctly parses React Native version 1`] = `
+"//  Created by react-native-create-bridge
+
+import React, { Component } from 'react'
+import { requireNativeComponent } from 'react-native'
+
+const SemverModule = requireNativeComponent('SemverModule', SemverModuleView)
+
+export default class SemverModuleView extends Component {
+  render () {
+    return <SemverModule {...this.props} />
+  }
+}
+
+SemverModuleView.propTypes = {
+  exampleProp: React.PropTypes.string
+}
+"
+`;
+
 exports[`JS: UI Components creates a TemplateNativeView.js 1`] = `
 "//  Created by react-native-create-bridge
 

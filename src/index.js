@@ -10,7 +10,7 @@ const { success: successIcon, error: errorIcon } = logSymbols;
 const fileOperations = require("./file-operations");
 const { pkg, getFileNames, readAndWriteFiles } = fileOperations;
 
-const rnVersion = semver(pkg.dependencies["react-native"]);
+const rnVersion = pkg.dependencies["react-native"];
 
 const templateNameRegex = /\w+/;
 const promptConfig = [
