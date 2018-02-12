@@ -1,7 +1,6 @@
 const path = require("path");
 const fs = require("mz/fs");
 const compareVersions = require("compare-versions");
-const validate = require("compare-versions");
 
 const pkg = require(path.join(process.cwd(), "package.json"));
 
@@ -19,12 +18,12 @@ function parseFile(fileData, { templateName, packageName, app, rnVersion }) {
   let kotlinPackage;
   let javaPackage;
   var version = rnVersion;
+  debugger;
   try {
-    validate(rnVersion);
+    compareVersions(version, "0.47.2");
   } catch (e) {
     version = null;
   }
-
   // TODO: figure out a better way to handle one off breaking changes
   if (version && compareVersions(version, "0.47.2") < 0) {
     kotlinPackage = `
