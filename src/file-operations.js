@@ -4,6 +4,19 @@ const compareVersions = require("compare-versions");
 
 const pkg = require(path.join(process.cwd(), "package.json"));
 
+// compare-versions module doesn't export the validate() function, and we need it, so it's copied here
+
+var semver = /^v?(?:\d+)(\.(?:[x*]|\d+)(\.(?:[x*]|\d+)(?:-[\da-z\-]+(?:\.[\da-z\-]+)*)?(?:\+[\da-z\-]+(?:\.[\da-z\-]+)*)?)?)?$/i;
+
+function validate(version) {
+  if (typeof version !== "string") {
+    throw new TypeError("Invalid argument expected string");
+  }
+  if (!semver.test(version)) {
+    throw new Error("Invalid argument not valid semver");
+  }
+}
+
 function getFileNames(dirPath) {
   return fs.readdir(dirPath).catch(e => console.error("[getFileNames] ", e));
 }
@@ -18,9 +31,8 @@ function parseFile(fileData, { templateName, packageName, app, rnVersion }) {
   let kotlinPackage;
   let javaPackage;
   var version = rnVersion;
-  debugger;
   try {
-    compareVersions(version, "0.47.2");
+    validate(version);
   } catch (e) {
     version = null;
   }
