@@ -56,9 +56,10 @@ function init() {
     .then(result => {
       const { environment, bridgeType, templateName, jsPath } = result;
 
-      const templateFolder = bridgeType.length > 1
-        ? "combined"
-        : bridgeType[0] === "Native Module" ? "modules" : "ui-components";
+      const templateFolder =
+        bridgeType.length > 1
+          ? "combined"
+          : bridgeType[0] === "Native Module" ? "modules" : "ui-components";
 
       const promises = environment.map(env =>
         environmentMap[env](templateName, templateFolder)
