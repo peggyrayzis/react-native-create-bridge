@@ -10,6 +10,7 @@
     "build:watch": "babel -w src --out-dir build",
     "start": "node build/index.js",
     "precommit": "lint-staged",
+    "prepublishOnly": "npm run build",
     "package:dev": "npm unlink react-native-create-bridge && rm -rf node_modules && yarn && npm run build && npm link"
   },
   "lint-staged": {
@@ -65,7 +66,9 @@
         }
       ]
     ],
-    "plugins": ["transform-runtime"]
+    "plugins": [
+      "transform-runtime"
+    ]
   },
   "rnpm": {
     "plugin": "./build/index.js"
