@@ -32,7 +32,7 @@ RCT_EXPORT_MODULE();
 - (NSDictionary *)constantsToExport
 {
   return @{
-           @"EXAMPLE": @"example"
+           @"EXAMPLE_CONSTANT": @"example"
          };
 }
 

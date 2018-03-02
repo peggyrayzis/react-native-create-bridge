@@ -34,7 +34,7 @@ RCT_EXPORT_VIEW_PROPERTY(exampleProp, NSString)
 - (NSDictionary *)constantsToExport
 {
   return @{
-           @"EXAMPLE": @"example"
+           @"EXAMPLE_CONSTANT": @"example"
          };
 }
 
