@@ -18,9 +18,16 @@ function readFile(file, readDirPath) {
 function parseFile(fileData, { templateName, packageName, app, rnVersion }) {
   let kotlinPackage;
   let javaPackage;
+  let version;
+
+  try {
+    version = semver(rnVersion);
+  } catch (e) {
+    version = "0.0.0";
+  }
 
   // TODO: figure out a better way to handle one off breaking changes
-  if (rnVersion && compareVersions(semver(rnVersion), "0.47.2") < 0) {
+  if (rnVersion && compareVersions(version, "0.47.2") < 0) {
     kotlinPackage = `
     override fun createJSModules(): List<Class<out JavaScriptModule>> {
         return emptyList()
