@@ -38,4 +38,9 @@ RCT_EXPORT_VIEW_PROPERTY(exampleProp, NSString)
          };
 }
 
++ (BOOL)requiresMainQueueSetup
+{
+  return YES;
+}
+
 @end
