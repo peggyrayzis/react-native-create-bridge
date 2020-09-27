@@ -68,8 +68,5 @@
     "plugins": [
       "transform-runtime"
     ]
-  },
-  "rnpm": {
-    "plugin": "./build/index.js"
   }
 }
