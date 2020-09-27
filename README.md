@@ -1,6 +1,8 @@
 # react-native-create-bridge
 Bridging native modules & UI components made easy! If you're a JavaScript developer writing your first lines of native code or a more experienced developer looking to eliminate boilerplate from your React Native workflow, this tool is for you.
 
+# CONTRIBUTORS WANTED
+
 ## Getting Started
 1. `npm install --save react-native-create-bridge` or `yarn add react-native-create-bridge`
 2. From the root of your React Native project, run `react-native new-module`
