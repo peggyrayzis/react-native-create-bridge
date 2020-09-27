@@ -1,6 +1,7 @@
 const path = require("path");
 const fs = require("mz/fs");
 const compareVersions = require("compare-versions");
+const semver = require("../utils/semver");
 
 const pkg = require(path.join(process.cwd(), "package.json"));
 
@@ -17,9 +18,16 @@ function readFile(file, readDirPath) {
 function parseFile(fileData, { templateName, packageName, app, rnVersion }) {
   let kotlinPackage;
   let javaPackage;
+  let version;
+
+  try {
+    version = semver(rnVersion);
+  } catch (e) {
+    version = "0.0.0";
+  }
 
   // TODO: figure out a better way to handle one off breaking changes
-  if (rnVersion && compareVersions(rnVersion, "0.47.2") < 0) {
+  if (rnVersion && compareVersions(version, "0.47.2") < 0) {
     kotlinPackage = `
     override fun createJSModules(): List<Class<out JavaScriptModule>> {
         return emptyList()

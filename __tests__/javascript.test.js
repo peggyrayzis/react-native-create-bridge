@@ -46,3 +46,23 @@ describe('JS: UI Components', () => {
     expect(parsedFile).toMatchSnapshot();
   });
 });
+
+describe('JS: Semver', () => {
+  const config = {
+    templateName: 'SemverModule',
+    rnVersion: "^0.49.1"
+  }
+  const readDirPath = path.join(
+    __dirname,
+    '..',
+    'templates',
+    'ui-components',
+    'js',
+  );
+
+  it('correctly parses React Native version', async () => {
+    const fileData = await readFile('TemplateNativeView.js', readDirPath);
+    const parsedFile = parseFile(fileData, config);
+    expect(parsedFile).toMatchSnapshot();
+  });
+});
